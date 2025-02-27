@@ -1,81 +1,44 @@
-# Sat Naing Portfolio & Blog
+# forkfolio
 
-![satnaing-portfolio-and-blog](https://user-images.githubusercontent.com/53733092/169645862-d1dda9cb-482f-4428-a63c-8eaf6910ab35.png)
-![ts](https://badgen.net/badge/Built%20With/TypeScript/blue) ![vercel](https://img.shields.io/github/deployments/satnaing/my-portfolio/production?label=vercel&logo=vercel&logoColor=white)
+🚀 Un portfolio si propre qu’il a été déployé avant même d’être terminé.
 
-My portfolio & blog website developed with Next.JS(SSG) and TypeScript. Tailwind CSS and GSAP is used for styling and animations. Blog contents are written in Markdown format. Light & Dark themes supported.
+🔧 **Infrastructure-as-Code First**  
+Parce que même un site statique mérite un déploiement Cloud-Native.
 
-## Features
+## 📌 Stack actuelle
+- **Framework** : Next.js + Tailwind CSS
+- **Déploiement initial** : Vercel (speedrun MVP)
+- **Gestion du contenu** : Markdown (MDX)
 
-- Responsive Design 📱💻
-- Light & Dark themes ☀️🌙
-- Fully Accessible ♿️
-- Categories, Tags 🏷
-- Search Box 👀
-- SEO Friendly 🔎
-- Markdown Content 📰
+## 🛠️ Roadmap (Automatisation et Infra)
+✅ **Phase 1 : MVP (Done ✅)**
+- [x] Fork et setup du projet
+- [x] Déploiement rapide sur Vercel
 
-## Tech Stack
+🔜 **Phase 2 : Automatisation du déploiement**
+- [ ] CI/CD avec GitHub Actions / GitLab CI  
+- [ ] Déploiement infra avec Terraform + Kubernetes  
+- [ ] Configuration automatisée avec Ansible  
+- [ ] Monitoring avec Prometheus + Grafana  
 
-**Frontend** - [NextJS](https://nextjs.org/), [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/)  
-**Styling** - [Tailwind CSS](https://tailwindcss.com/)  
-**Animations** - [GSAP](https://greensock.com/)  
-**Design & Prototype** - [Figma](https://figma.com/)  
-**State Management** - [ContextAPI](https://reactjs.org/docs/context.html)  
-**Backend** - [Forestry Headless CMS](https://forestry.io/)  
-**Deployment** - [Vercel](https://vercel.com/)
+🎨 **Le CSS est temporaire, l’automatisation est éternelle.**  
+(Si vous voyez encore du design moche, c’est que je suis encore en train de bosser sur l’infra.)  
 
-## Lighthouse Score
+## 🚀 Déploiement
+Ce projet est en **déploiement continu** via [Vercel](https://vercel.com).  
+À terme, **il sera auto-hébergé via un pipeline Git → Terraform → Kubernetes.**  
 
-<p align="center">
-  <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fsatnaing.dev%2F&form_factor=desktop">
-    <img width="710" alt="Sat Naing Portfolio Website Lighthouse Score" src="public/lighthouse-result.svg">
-  <a>
-</p>
+---
 
-## Running Locally
+💡 **Pourquoi ?**  
+> Parce que **même un site statique mérite un déploiement Cloud-Native.**  
+> Parce que **c’est plus marrant de faire du Terraform que du CSS.**  
+> Parce que **j’aime automatiser tout ce qui peut l’être.**  
 
-Clone the project
+---
 
-```bash
-git clone https://github.com/satnaing/satnaing.dev.git
-```
-
-Go to the project directory
-
-```bash
-cd satnaing.dev
-```
-
-Remove remote origin
-
-```bash
-git remote remove origin
-```
-
-Install dependencies
-
-```bash
-npm install
-```
-
-Start the server
-
-```bash
-npm run dev
-```
-
-## Inspiration and Credits
-
-Here are some inspiration and credits for the design of my portfolio. However I can guarantee that I wrote 100% of the code. These credits are just for ideas and design for my portfolio and blog website.
-
-- [Lee Robinson Website](https://leerob.io/)
-- [Papermod Hugo Theme](https://adityatelange.github.io/hugo-PaperMod/)
-- [Brittany Chiang Website](https://brittanychiang.com/)
-- [Max Böck Website](https://mxb.dev/)
-
-The digital art in the hero section was illustrated by a friend of mine ([Swann Fevian Kyaw](https://www.facebook.com/bon.zai.3910) [@ToonHa](https://www.facebook.com/ToonHa-102639465752883))
-
-## Author
-
-- [@satnaing](https://satnaing.dev)
+## 📬 Contact
+Si t’es DevOps / Backend et que ce genre de projet te parle :  
+📧 **Email** : [corentin33boucard@gmail.com](mailto:corentin33@boucard.com)  
+🐙 **GitHub** : [github.com/Wooulf](https://github.com/Wooulf)  
+💼 **LinkedIn** : [linkedin.com/in/corentin-boucard](https://www.linkedin.com/in/corentin-boucard)  
