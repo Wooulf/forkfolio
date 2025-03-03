@@ -90,7 +90,7 @@ const HeroSection: React.FC = () => {
         aria-hidden="true"
         className="bg-text absolute -top-36 rotate-12 text-gray-100 dark:text-[#1f2e3a] text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none text-center z-0"
       >
-        PASSIONATE PROGRAMMER FREELANCER FULL-STACK DEVELOPER
+        DEVOPS AUTOMATION | BACKEND ENGINEER | INFRA-AS-CODE ENTHUSIAST
       </span>
 
       <div className="image-animation z-10 select-none mt-0 xs:mt-6 sm:mt-14 lg:mt-0 px-0 mx-auto lg:p-0 lg:basis-1/3">
@@ -120,32 +120,36 @@ const HeroSection: React.FC = () => {
 
       <div className="lg:basis-2/3 z-10 relative">
         <span className="text-marrsgreen lg:text-lg font-medium dark:text-carrigreen">
-          Hi my name is
+          Bonjour, je m'appelle
         </span>
         <div className="overflow-hidden">
           <h1 className="text-animation text-4xl md:text-5xl lg:text-7xl md:my-2 font-semibold my-1">
-            Sat Naing
+            Corentin Boucard
           </h1>
         </div>
         <div className="overflow-hidden">
           <span className="text-animation text-2xl md:text-3xl lg:text-5xl block md:my-3 text-marrsgreen dark:text-carrigreen font-medium">
-            A Full-stack Developer
+            Backend Developer | DevOps Enthusiast
           </span>
         </div>
         <div className="mt-2 my-4 md:mb-8">
           <p className="mb-1">
-            I am a Full-Stack Developer with a passion for delivering
-            exceptional results.
+            Développeur backend, je m'atelle désormais au DevOps afin de
+            maîtriser de bout en bout la chaîne de création d'une architecture
+            applicative.
+          </p>
+          <p className="mb-1">
+            Avec de bonnes bases en backend (Java Spring Boot, NestJS) et en
+            frontend (Vue.js, Next.js), j’ajoute désormais les outils DevOps
+            dans mon workflow (Terraform, Ansible, Kubernetes, CI/CD pipelines).
           </p>
           <p>
-            With my expertise in React and NextJS on the frontend, and PHP,
-            CodeIgniter, NodeJS, and Express on the backend, I bring a unique
-            combination of technical skills and creative problem-solving to
-            every project I work on.
+            Tout cela dans le but de déployer et automatiser des architectures
+            robustes et scalables.
           </p>
         </div>
         <LinkButton href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}>
-          Contact me!
+          Contactez moi !
         </LinkButton>
       </div>
       <a

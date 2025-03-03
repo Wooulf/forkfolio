@@ -124,15 +124,15 @@ const socialLinks = [
 const navLinks = [
   {
     url: "#",
-    text: "Welcome",
+    text: "Bienvenue",
   },
   {
     url: "#whoami",
-    text: "Who am i?",
+    text: "Qui suis-je ?",
   },
   {
     url: "#projects",
-    text: "Projects",
+    text: "Projets",
   },
   {
     url: "#blog",

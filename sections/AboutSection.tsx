@@ -116,7 +116,7 @@ const AboutSection: React.FC = () => {
               order={1}
               show={isSecOnScreen}
             >
-              <h2 className="section-heading">Who am I?</h2>
+              <h2 className="section-heading">Qui suis-je ?</h2>
             </RoughNotation>
           </div>
           <div className="md:grid grid-rows-5 lg:grid-rows-6 grid-cols-5">
@@ -169,19 +169,22 @@ const AboutSection: React.FC = () => {
             </div>
 
             <p className="col-start-1 col-end-3 row-start-4 row-end-6 lg:row-start-1 lg:row-end-2 lg:col-start-3 lg:col-end-6 lg:ml-8 lg:mt-auto about-intro">
-              With 4+ years of comprehensive experience in web application
-              development, I have polished my skills in both frontend and
-              backend development. In addition to my hands-on experience in web
-              development, my education has also played a critical role in
-              providing a strong foundation for my career.
+              Avec un diplôme d’ingénieur et 3 ans d’expérience en alternance,
+              j’ai développé des compétences polyvalentes en backend et en
+              DevOps. En plus du développement, j’ai automatisé le cycle de vie
+              des applications avec des pipelines CI/CD, images Docker, et
+              scripts. J’ai travaillé sur des projets variés, ce qui m’a appris
+              à m’adapter rapidement et à résoudre des problèmes efficacement.
+              Cette expérience me permet d’être opérationnel rapidement,
+              notamment dans un contexte agile.
             </p>
 
             <div
-              className="col-start-3 col-end-6 row-start-1 row-end-6 lg:row-start-2 lg:row-end-7 md:ml-8 place-content-end"
+              className="col-start-3 col-end-6 row-start-1 row-end-6 lg:row-start-2 lg:row-end-5 md:ml-8 place-content-end"
               ref={eduRef}
             >
-              <p className="edu-bg my-4">Here is my educational background.</p>
-              {educationInfo.map((edu) => (
+              <p className="edu-bg my-4">Voici mon parcours pro.</p>
+              {workExperience.map((edu) => (
                 <EduGroup edu={edu} key={edu.id} />
               ))}
             </div>
@@ -194,31 +197,44 @@ const AboutSection: React.FC = () => {
   );
 };
 
-const educationInfo = [
+const workExperience = [
   {
     id: 1,
-    title: "B.Sc (Hons) in Computing",
-    subTitle: "Edinburgh Napier University | 2018 ~ 2019",
+    title: "Développeur Backend / DevOps",
+    subTitle: "Crédit Mutuel Arkéa | 2022 - 2024",
+    description:
+      "Intégré à une équipe transverse en méthodologie agile, j'ai travaillé sur des migrations et de l'automatisation DevOps.",
     list: [
-      "Studied computer science, software development, DevOps",
-      "Graduated with First Class Honours",
-      "Got merit in 7 modules out of 9",
+      "Migration d’une application Java GWT vers un backend Spring Boot (gestion projet + dev).",
+      "Mise en place de pipelines CI/CD et conteneurisation Docker pour les tests applicatifs.",
+      "Refonte du front-end d’une application métier (GWT → Vue.js).",
+      "Automatisation de tests via un convertisseur Stoplight → Postman.",
+      "Déploiement et supervision applicative (Docker, GitLab CI, sondes, monitoring).",
     ],
   },
   {
     id: 2,
-    title: "HND in Computing & System Development",
-    subTitle: "Info Myanmar University | 2016 - 2018",
+    title: "Développeur Backend",
+    subTitle: "Ergoss Logiciels | 2021 - 2022",
+    description:
+      "Développement d'une API monolithique en C# dans un environnement structuré.",
     list: [
-      "Studied modules specializing in software development",
-      "Passed HND with overall Merit",
+      "Conception et maintenance d'une API en C# exposée aux clients.",
+      "Collaboration avec les équipes via Git, Azure DevOps et Jira.",
     ],
   },
   {
     id: 3,
-    title: "IELTS",
-    subTitle: "British Council Myanmar | 2017",
-    list: ["Got overall band score 6.5."],
+    title: "Network, Development & Security",
+    subTitle: "GIE 246 | 2021",
+    description:
+      "Travail sur la sécurisation et la gestion des accès au sein de l'entreprise.",
+    list: [
+      "Mise en place d’un bastion d’authentification.",
+      "Étude et implémentation de solutions de gestion de mots de passe.",
+      "Développement d’un script de rotation des mots de passe pour les switchs réseau.",
+      "Migration d’outils internes vers une solution cloud.",
+    ],
   },
 ];
 

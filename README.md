@@ -31,9 +31,11 @@ Ce projet est en **déploiement continu** via [Vercel](https://vercel.com).
 ---
 
 💡 **Pourquoi ?**  
-> Parce que **même un site statique mérite un déploiement Cloud-Native.**  
-> Parce que **c’est plus marrant de faire du Terraform que du CSS.**  
-> Parce que **j’aime automatiser tout ce qui peut l’être.**  
+```diff
++ Même un site statique mérite un déploiement Cloud-Native.
++ C’est plus marrant de faire du Terraform que du CSS.
++ J’aime automatiser tout ce qui peut l’être.
+```
 
 ---
 
