@@ -9,7 +9,7 @@ import { useSection } from "context/section";
 import useOnScreen from "hooks/useOnScreen";
 import useScrollActive from "hooks/useScrollActive";
 
-import satNaing from "../public/satnaing.webp";
+import woulf from "../public/woulf.webp";
 import AboutBgSvg from "@/components/AboutBgSvg";
 import EduGroup from "@/components/EduGroup";
 
@@ -119,8 +119,8 @@ const AboutSection: React.FC = () => {
               <h2 className="section-heading">Qui suis-je ?</h2>
             </RoughNotation>
           </div>
-          <div className="md:grid grid-rows-5 lg:grid-rows-6 grid-cols-5">
-            <div className="col-start-1 col-end-3 row-start-1 row-end-4 lg:row-end-7 lg:col-start-1 lg:col-end-3 flex justify-center items-center py-4 lg:mb-[20%]">
+          <div className="md:grid grid-rows-5 lg:grid-rows-5 grid-cols-5">
+            <div className="col-start-1 col-end-3 row-start-1 row-end-4 lg:col-start-1 lg:col-end-3 flex justify-center items-center py-4 lg:mb-[20%]">
               <div className="relative w-72">
                 <svg
                   width="96"
@@ -135,11 +135,11 @@ const AboutSection: React.FC = () => {
 
                 <div className="profile-picture overflow-hidden md:overflow-visible rounded-md md:shadow-2xl">
                   <Image
-                    src={satNaing}
+                    src={woulf}
                     width={1700}
                     height={1790}
                     priority
-                    alt="Sat Naing profile picture"
+                    alt="Photo de profil de Corentin Boucard"
                     className="rounded-md"
                   />
                 </div>

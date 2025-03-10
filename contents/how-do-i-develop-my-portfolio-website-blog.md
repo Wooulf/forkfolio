@@ -1,110 +1,155 @@
 ---
 coverImageWidth: "1200"
 coverImageHeight: "700"
-datetime: 2022-03-25T16:55:12.000+00:00
+datetime: 2025-03-10T14:37:30Z
 tags:
+  - MicroK8s
   - NextJS
-  - TailwindCSS
-  - HeadlessCMS
+  - Tailwind CSS
   - Blog
-author: Sat Naing
+author: Woulf
 type: article
 coverImage: https://res.cloudinary.com/noezectz/image/upload/v1653050141/SatNaing/blog_at_cafe_ei1wf4.jpg
 coverImageAlt: Macbook at a cafe
-title: How Do I Develop My Portfolio Website & Blog
+title: Comment j'ai auto-hébergé mon portfolio
 description:
-  My experience about developing my first portfolio website and a blog
-  using NextJS and a headless CMS.
+  Mon retour d'expérience sur le développement et l'hébergement automatisé de mon portfolio,
+  en utilisant Next.js, TailwindCSS et MicroK8s.
 excerpt:
-  My journey about planning, designing and developing my very first portfolio
-  website and my personal blog. Thoughts about my motivation for this project and
-  experiences.
-slug: how-do-i-develop-my-portfolio-and-blog
+  Mon parcours de réflexion, de conception et de développement pour créer mon portfolio et
+  l'automatiser avec des pipelines CI/CD et Kubernetes. Retour sur les défis rencontrés et
+  les choix techniques effectués.
+slug: automatisation-deploiement-portfolio
 featured: true
-category: How Do I
-language: English
+category: DevOps & Développement
+language: French
 ---
 
-My experience about developing my first portfolio website and a blog using NextJS and a headless CMS.
+Dans une volonté de m'orienter vers le DevOps, j'ai décidé d'automatiser le déploiement de mon site.
+Tout d'abord, ce projet reposera sur un modèle GitOps, c'est à dire que ce qui sera présent sur le repo git, ici sur Github, servira de source de vérité.
 
-## Motivation
+## Objectifs
 
-I've been always thinking about launching my own website with my custom domain name (**satnaing.dev**) since my college student life. But that never happened until this project. I've done several projects and works about web application development but I didn't make an effort to do this.
+Le but de ce projet étant tout d'abord d'obtenir un MVP (Minimum Viable Product), en suivant une logique de méthode agile, j'ai d'abord décidé de limiter le projet à ce qui suit :
 
-So, "what about blog?" you may ask. Yeah, blog also has been in my project list for some time. I always wanted to make a blog project using some of the latest technologies. However, I've been busy with my works and other projects so that blog project has never been started.
+1. Un cluster Kubernetes à l'aide de MicroK8s
+2. Un déploiement de mon portfolio sous forme d'un conteneur Docker
+3. Une exposition via un nom de domaine personnalisé
+4. Des pipelines CI/CD pour automatiser les mises à jour du site web et des configurations du cluster
+5. Un monitoring permettant de surveiller la santé du cluster
 
-In these days, I tend to develop my own projects with the focus in good quality rather than quantity. After the project is done, I usually put a proper readme file in the Github repo. But Github repo readme is only suitable for technical aspects (this is just my thought). I want to write down my experiences and challenges. Thus, I decided to make my own blog. Plus, at this point, I have decent experiences and confidence to develop this project.
+### Pourquoi MicroK8s
 
-## Tech Stack
+MicroK8s a été choisi pour sa simplicité d'installation et configuration, parfaite dans le cadre d'un MVP.
+D'autres options pourront être explorées lors de l'évolution de ce projet.
 
-For the front-end, I wanted to use [React](https://reactjs.org/ "React Official Website"). But React alone is not good enough for SEO; and I did have to consider many factors like routing, image optimization etc. So, I chose [NextJS](https://nextjs.org/ "NextJS Official Website") as my main front-end stack. And of course TypeScript for type checking. (It's said that you'll love TypeScript when you're used to it 😉)
+### Choix du VPS
 
-For styling, I use [TailwindCSS](https://tailwindcss.com/ "Tailwind CSS Official Website"). This is because I love developer experience that Tailwind gives and it has a lot of flexibilities compared to other component UI libraries like MUI or React Bootstrap.
+Le VPS (Virtual Private Server) a été choisi par défaut, j'en possédais déjà un sur pulseheberg, voici sa configuration :
 
-All contents of this project reside within the GitHub repository. All my blog posts (including this one) are written in Markdown file format since I'm very used to with this. But to write Markdown along with its frontmatter effortlessly, I use [Forestry](https://forestry.io/ "Forestry Official Website") headless CMS. It is a git-based CMS that can serve Markdown and other contents. Because of this, I can write my contents either using Markdown or wysiwyg editor. Besides, writing frontmatters with this is a breeze.
+- Processeur : Intel Xeon E5-2680v4
+- RAM : 8GB DDR4
+- Stockage : 1TB en RAID 10
+- Connexion : 750 Mbps
+- OS : Ubuntu 22.04 LTS
 
-Images and assets are uploaded and stored in [Cloudinary](https://cloudinary.com/ "Cloudinary Official Website"). I connect Cloudinary via Forestry and manage them directly in the dashboard.
+Ce qui est largement au dessus des minimum requis par le logiciel.
 
-In conclusion, these are the tech stack I've used for this project.
+> MicroK8s runs in as little as 540MB of memory, but to accommodate workloads, we recommend a system with at least 20G of disk space and 4G of memory.
+> _official doc_
 
-- Front-end: NextJS (TypeScript)
-- Styling: TailwindCSS
-- Animations: GSAP
-- CMS: Forestry Headless CMS
-- Deployment: Vercel
+## Création de l'image Docker
 
-## Features
+Pour automatiser ce segment, nous allons faire en sorte que chaque nouveau commit sur la branche principale du repo Github de l'appli construise une nouvelle image, et la pousse sur le registry Docker Hub, sous le tag latest.
 
-The following are certain features of my portfolio and blog
+Pour ce faire, je vais créer une pipeline. Sur Github, les pipelines fonctionnent à l'aide de Github Actions.
+Pour avoir notre pipeline fonctionnelle, il faut créer un fichier yaml sous le dossier .github/workflows .
+Je vais ensuite créer le repository de l'image sur Docker Hub avec mon compte.
 
-### SEO Friendly
+Puis je crée un fichier deploy.yml au sein du dossier workflows avec ceci :
 
-The entire project is developed with SEO focus in mind. I've used proper meta tags, descriptions and heading alignments. This website is now indexed by Google.
+```
+name: Deploy Website
 
-> You can search this website on google by using keywords like 'sat naing dev'
+on:
+  push:
+    branches:
+      - main
 
-![searching satnaing.dev on google](https://res.cloudinary.com/noezectz/image/upload/v1648231400/SatNaing/satnaing-on-google_asflq6.png "satnaing.dev is indexed")
+env:
+  NAMESPACE: default
+  DEPLOYMENT_NAME: portfolio
 
-Moreover, this website will be displayed well when shared to social media due to properly used meta tags.
+jobs:
+  build_push_image:
+    name: Build & Push Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-![satnaing.dev card layout when shared to Facebook](https://res.cloudinary.com/noezectz/image/upload/v1653106955/SatNaing/satnaing-dev-share-on-facebook_1_zjoehx.png "Card layout when shared to Facebook")
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-### Dynamic Sitemap
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: woulf/portfolio:latest
+```
 
-Sitemap plays an important part in SEO. Because of this, every single page of this site should be included in sitemap.xml. I made an auto generated sitemap in my website whenever I create a new content or tags or categories.
+Avec ça, mon image est correctement construite et publiée à chaque nouveau commit sur la branche main
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6s9kch8i2m1yfseue0dm.png)
 
-### Light & Dark Themes
+### Nom de domaine personnalisé
 
-Due to dark theme trend in recent years, many websites include dark theme out of the box nowadays. Certainly, my website also supports light & dark themes.
+Avoir un nom de domaine me permettra de partager de plus joli lien que de laides adresses IP.
+Ici aussi, je vais me servir de ce que je possède déjà.
+Avec PulseHeberg, je loue annuellement le nom de domaine woulf.fr pour 8€/an.
+Je vais donc exposer mon portfolio via ceci.
 
-### Fully Accessible
+## Installation et configuration de MicroK8s
 
-This website is fully accessible. You can navigate around by only using keyboard. I put all a11y enhancement best practices like including alt text in all images, no skipping headings, using semantic HTML tags, using aria-attributes properly.
+Pour installer simplement MicroK8s sur mon VPS, je vais me servir du packet manager snap :
+`sudo snap install microk8s --classic`
 
-### Search box, Categories & Tags
+Pour ne pas à avoir à taper sudo pour chaque commande :
+`sudo usermod -a -G microk8s $USER`
+`newgrp microk8s`
 
-All blog contents can be searched by search box. Moreover, contents can be filtered by categories and tags. In this way, blog readers can search and read what they really want.
+Je vérifie que MicroK8s soit bien installé :
+`microk8s status --wait-ready`
 
-### Performance and Lighthouse Score
+Activation des modules suivants :
+`microk8s enable dns ingress storage`
 
-This website got very good performance and lighthouse score thanks to proper development and best practices. Here's the lighthouse score for this website.
+- DNS : pour la résolution de noms dans le cluster.
+- Ingress : pour gérer les accès HTTP/HTTPS.
+- Storage : pour la gestion des volumes persistants.
 
-![satnaing.dev Lighthouse score](https://user-images.githubusercontent.com/53733092/159957822-7082e459-11e9-4616-8f1e-49d0881f7cbb.png "satnaing.dev Lighthouse score")
+Vérification que les services soient bien actifs
+`microk8s kubectl get all -A`
 
-### Animations
+Pour utiliser kubectl depuis mon utilisateur normal, j'exporte la config :
+`microk8s config > ~/.kube/config`
 
-Initially I used [Framer Motion](https://www.framer.com/motion/ "Framer Motion") to add animations and micro interactions for this website. However, when I tried to use some complex animations and parallax effects, I found it inconvenient to integrate with Framer Motion (Maybe I'm not very good at and used to working with it). Hence, I decided to use [GSAP](https://greensock.com/ "GSAP Animation Library") for all of my animations. It is one of the most popular animation library and it is capable of doing complex and advanced animations. You can see animations and micro interactions on pretty much every page of this website.
+### Configuration du pare-feu
 
-![animations at satnaing.dev](https://res.cloudinary.com/noezectz/image/upload/v1653108324/SatNaing/ezgif.com-gif-maker_2_hehtlm.gif "satnaing.dev website")
+```
+sudo ufw allow 22/tcp    # SSH
+sudo ufw allow 80,443/tcp # HTTP/HTTPS
+sudo ufw allow 16443/tcp  # Kubernetes API
+```
 
-## Outro
-
-In conclusion, this project gives me a lot of experience and confidence about developing blog site (SSG). Now, I have gained knowledge of git-based CMS and how it interacts with NextJS. I've also learned about SEO, dynamic sitemap generation and indexing Google procedures. I will make better projects in the future. So, stay tuned! ✌🏻
-
-And... last but not least, I would like to say 'thanks' to my friend [Swann Fevian Kyaw](https://www.facebook.com/bon.zai.3910 "Swann Fevian Kyaw's Facebook Account") (@[ToonHa](https://www.facebook.com/ToonHa-102639465752883 "ToonHa Facebook Page")) who has drawn a beautiful illustration for my hero section of the website.
+Puis on l'active
+`sudo ufw enable`
 
 ## Project Links
 
-- Website: [https://satnaing.dev/](https://satnaing.dev/ "https://satnaing.dev/")
-- Blog: [https://satnaing.dev/blog](https://satnaing.dev/blog "https://satnaing.dev/blog")
-- Repo: [https://github.com/satnaing/my-portfolio](https://github.com/satnaing/my-portfolio "https://github.com/satnaing/my-portfolio")
+- Website: [http://woulf.fr/](http://woulf.fr/ "http://woulf.fr/")
+- Blog: [http://woulf.fr/blog](http://woulf.fr/blog "http://woulf.fr/blog")
+- Repo: [https://github.com/Wooulf/forkfolio](https://github.com/Wooulf/forkfolio "https://github.com/Wooulf/forkfolio")

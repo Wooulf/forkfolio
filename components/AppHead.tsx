@@ -24,7 +24,7 @@ const AppHead: React.FC<Props> = ({
 }) => {
   let author = "Woulf";
   let description =
-    "Articles about programming, coding, technologies, software engineering, my personal projects and my experiences.";
+    "Articles sur la programmation, le développement, les technologies, l'ingénierie logicielle, mes projets personnels et mes expériences.";
   let siteName = "Woulf's Blog";
   let type = "article";
   let coverImage: string | undefined;
