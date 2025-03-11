@@ -1,5 +1,8 @@
 FROM node:18-alpine AS build
 
+ENV NEXT_PUBLIC_EMAIL=corentin33boucard@gmail.com
+ENV NEXT_PUBLIC_URL=http://woulf.fr
+
 WORKDIR /app
 
 COPY package*.json ./
