@@ -122,5 +122,8 @@ fields:
   label: Type
   description: Type of the post for OG
 pages:
-- contents/how-do-i-develop-my-portfolio-website-blog.md
-- contents/how-do-i-develop-my-terminal-portfolio-website-with-react.md
+- contents/article1.md
+- contents/article2.md
+- contents/article3.md
+- contents/article4.md
+- contents/article5.md
