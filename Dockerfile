@@ -1,27 +1,29 @@
-FROM node:18-alpine AS build
-
-ENV NEXT_PUBLIC_EMAIL=corentin33boucard@gmail.com
-ENV NEXT_PUBLIC_URL=http://woulf.fr
-
+# Étape 1 — Base commune avec installation des dépendances prod
+FROM node:23-alpine AS base
 WORKDIR /app
-
 COPY package*.json ./
+RUN npm ci --omit=dev
 
-RUN npm install --omit=dev
-
+# Étape 2 — Build de l'application en mode standalone
+FROM base AS builder
 COPY . .
-
 RUN npm run build
 
-FROM node:18-alpine AS runtime
-
+# Étape 3 — Runtime minimal, sécurisé et sans devDependencies
+FROM node:23-alpine AS runner
 WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3000
 
-COPY --from=build /app/package*.json ./
-COPY --from=build /app/.next ./.next
-COPY --from=build /app/public ./public
-COPY --from=build /app/node_modules ./node_modules
+# Création d’un utilisateur non-root pour la sécurité
+RUN addgroup -g 1001 -S nodejs && adduser -u 1001 -S nextjs -G nodejs
+
+# Copie des fichiers nécessaires uniquement
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+USER nextjs
 
 EXPOSE 3000
-
-CMD ["npm", "run", "start"]
+CMD ["node", "server.js"]

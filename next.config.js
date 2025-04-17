@@ -21,6 +21,7 @@ module.exports = {
   compiler: {
     removeConsole: true,
   },
+  output: 'standalone',
 };
 
 // const nextConfig = {
