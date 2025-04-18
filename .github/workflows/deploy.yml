@@ -30,6 +30,9 @@ jobs:
           context: .
           push: true
           tags: woulf/portfolio:latest
+          build-args: |
+            NEXT_PUBLIC_EMAIL=${{ secrets.NEXT_PUBLIC_EMAIL }}
+            NEXT_PUBLIC_URL=${{ secrets.NEXT_PUBLIC_URL }}
 
   rollout_k8s:
     name: Restart Kubernetes Deployment
