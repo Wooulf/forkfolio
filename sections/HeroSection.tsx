@@ -94,7 +94,7 @@ const HeroSection: React.FC = () => {
       </span>
 
       <div className="image-animation z-10 select-none mt-0 xs:mt-6 sm:mt-14 lg:mt-0 px-0 mx-auto lg:p-0 lg:basis-1/3">
-        <div className="relative w-72 md:w-80 h-100 flex items-center mx-auto">
+        <div className="relative w-72 md:w-80 h-[20rem] sm:h-[25rem] lg:h-[32rem] flex items-center mx-auto">
           <div className="absolute pointer-events-none scale-90 xs:scale-95 mx-auto">
             <Image
               src={woulf}
@@ -107,13 +107,14 @@ const HeroSection: React.FC = () => {
               className="rounded-full"
             />
           </div>
-          <div className="laptop absolute top-14 sm:top-16 left-0 scale-[.41] xs:scale-[.45] pointer-events-none">
+          <div className="laptop absolute bottom-2 sm:bottom-4 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
             <Image
               src={laptop}
               width={559}
               height={386}
               aria-hidden="true"
               alt="Laptop illustration"
+              className="object-contain object-top"
             />
           </div>
         </div>

@@ -24,7 +24,7 @@ export const meta = {
     "Corentin Boucard est un développeur backend avec une approche DevOps. Passionné par l'automatisation et le développement d'applications, il aime relever des défis techniques et optimiser les processus.",
   author: "Corentin Boucard",
   type: "website",
-  ogImage: `${process.env.NEXT_PUBLIC_URL}/satnaing-dev-og-new.png`,
+  ogImage: `${process.env.NEXT_PUBLIC_URL}/woulf-dev-og-new.png`,
   siteName: "Corentin Boucard",
   imageAlt: "Corentin Boucard portfolio",
 };
