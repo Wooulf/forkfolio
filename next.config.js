@@ -16,7 +16,7 @@ module.exports = {
   reactStrictMode: true,
   trailingSlash: false,
   images: {
-    domains: ["res.cloudinary.com", "dev-to-uploads.s3.amazonaws.com"],
+    domains: ["media2.dev.to", "dev-to-uploads.s3.amazonaws.com"],
   },
   compiler: {
     removeConsole: true,
