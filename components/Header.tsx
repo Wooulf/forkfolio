@@ -25,16 +25,16 @@ const navLinks = [
     ),
     text: "Projets",
   },
-  // {
-  //   url: "#blog",
-  //   svg: (
-  //     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-  //       <path d="M19.875 3H4.125C2.953 3 2 3.897 2 5v14c0 1.103.953 2 2.125 2h15.75C21.047 21 22 20.103 22 19V5c0-1.103-.953-2-2.125-2zm0 16H4.125c-.057 0-.096-.016-.113-.016-.007 0-.011.002-.012.008L3.988 5.046c.007-.01.052-.046.137-.046h15.75c.079.001.122.028.125.008l.012 13.946c-.007.01-.052.046-.137.046z" />
-  //       <path d="M6 7h6v6H6zm7 8H6v2h12v-2h-4zm1-4h4v2h-4zm0-4h4v2h-4z" />
-  //     </svg>
-  //   ),
-  //   text: "Blog",
-  // },
+  {
+    url: "#blog",
+    svg: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+        <path d="M19.875 3H4.125C2.953 3 2 3.897 2 5v14c0 1.103.953 2 2.125 2h15.75C21.047 21 22 20.103 22 19V5c0-1.103-.953-2-2.125-2zm0 16H4.125c-.057 0-.096-.016-.113-.016-.007 0-.011.002-.012.008L3.988 5.046c.007-.01.052-.046.137-.046h15.75c.079.001.122.028.125.008l.012 13.946c-.007.01-.052.046-.137.046z" />
+        <path d="M6 7h6v6H6zm7 8H6v2h12v-2h-4zm1-4h4v2h-4zm0-4h4v2h-4z" />
+      </svg>
+    ),
+    text: "Blog",
+  },
   {
     url: "#contact",
     svg: (
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
     const _classList = [];
 
     if (scroll.y > 150 && scroll.y - scroll.lastY > 0)
-      _classList.push("!shadow-md");
+      _classList.push("shadow-md!");
 
     setNavClassList(_classList);
   }, [scroll.y, scroll.lastY]);
@@ -98,7 +98,7 @@ const Header: React.FC = () => {
             <span className="text-marrsgreen dark:text-carrigreen">.dev</span>
           </Link>
           <nav className="flex items-center">
-            <div className="glassmorphism md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none fixed md:static bottom-4 z-30 left-1/2 md:left-auto transform -translate-x-1/2 md:transform-none bg-bglight dark:bg-carddark dark:text-textlight w-11/12 rounded drop-shadow-lg md:drop-shadow-none">
+            <div className="glassmorphism md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none fixed md:static bottom-4 z-30 left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0 bg-bglight dark:bg-carddark dark:text-textlight w-11/12 rounded-sm drop-shadow-lg md:drop-shadow-none">
               <ul className="flex justify-evenly items-center py-1">
                 {navLinks.map((navLink) => (
                   <li key={navLink.url}>

@@ -82,7 +82,7 @@ const BlogHeroSection: React.FC = () => {
           className="placeholder:italic placeholder:text-opacity-75 py-3 pr-14 pl-5 
                     block bg-cardlight dark:bg-carddark w-full rounded shadow-md
                     border border-cardlight dark:border-carddark border-opacity-40 
-                    focus:outline-none focus:border-marrslight focus:dark:border-carrilight"
+                    focus:outline-hidden focus:border-marrslight dark:focus:border-carrilight"
           placeholder="Search for anything..."
           type="text"
           name="search"

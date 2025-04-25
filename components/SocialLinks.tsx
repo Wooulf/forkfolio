@@ -41,7 +41,7 @@ const SocialLinks: React.FC<{ page?: string }> = ({ page }) => {
               key={social.id}
               title={social.title}
               href={social.link}
-              className="scale-110 rounded link-outline"
+              className="scale-110 rounded-sm link-outline"
             >
               {social.svg}
             </a>
