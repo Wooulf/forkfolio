@@ -1,8 +1,105 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 976px;
+  --breakpoint-xl: 1440px;
+
+  --font-*: initial;
+  --font-sans: 'Jost', sans-serif;
+
+  --color-bglight: #f9fafb;
+  --color-marrslight: #1c9a9a;
+  --color-marrsgreen: #007a7a;
+  --color-marrsdark: #004d4d;
+  --color-cardlight: #eff3f3;
+  --color-bgdark: #1d2a35;
+  --color-carrilight: #57dcb4;
+  --color-carrigreen: #05ce91;
+  --color-carridark: #00835b;
+  --color-carddark: #22323f;
+  --color-textlight: #f9fafb;
+}
 
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  html {
+    @apply font-sans bg-bglight dark:bg-bgdark;
+  }
+}
+
+@utility section {
+  @apply py-11 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-20 max-w-6xl mx-auto lg:min-h-[768px];
+}
+
+@utility section-heading {
+  @apply text-2xl md:text-3xl xl:text-4xl inline-block my-6 font-medium;
+}
+
+@utility link-outline {
+  @apply outline-marrsgreen dark:outline-carrigreen;
+}
+
+@utility link {
+  @apply outline-marrsgreen dark:outline-carrigreen text-marrsdark hover:text-marrsgreen dark:text-carrilight dark:hover:text-carrigreen;
+}
+
+@utility blog-main {
+  @apply mb-20 mt-16 min-h-[70vh];
+}
+
+@utility blog-section {
+  @apply py-8 px-4 sm:px-8 md:px-20 max-w-4xl mx-auto;
+}
+
+@utility glassmorphism {
+  @apply bg-clip-padding backdrop-filter backdrop-blur-xl;
+}
+
+@utility lower-glassmorphism {
+  @apply after:backdrop-blur-xl! after:w-full after:h-full after:absolute after:top-0 after:left-0 after:-z-10;
+}
+
+@utility swiper-padding {
+  padding: 0 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+@utility swiper-padding-mobile {
+  padding: 0 !important;
+  padding-bottom: 3rem !important;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
   html {
     @apply scroll-smooth overflow-y-scroll;
   }
@@ -33,44 +130,6 @@
   }
 }
 
-@layer components {
-  .section {
-    @apply py-11 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-20 max-w-6xl mx-auto lg:min-h-[768px];
-  }
-  .section-heading {
-    @apply text-2xl md:text-3xl xl:text-4xl inline-block my-6 font-medium;
-  }
-  .link-outline {
-    @apply outline-marrsgreen dark:outline-carrigreen;
-  }
-  .link {
-    @apply outline-marrsgreen dark:outline-carrigreen text-marrsdark hover:text-marrsgreen dark:text-carrilight dark:hover:text-carrigreen;
-  }
-  .blog-main {
-    @apply mb-20 mt-16 min-h-[70vh];
-  }
-  .blog-section {
-    @apply py-8 px-4 sm:px-8 md:px-20 max-w-4xl mx-auto;
-  }
-  .glassmorphism {
-    @apply bg-clip-padding backdrop-filter backdrop-blur-xl !bg-opacity-50 dark:!bg-opacity-60;
-  }
-  .lower-glassmorphism {
-    @apply !bg-opacity-50 dark:!bg-opacity-60 after:!backdrop-blur-xl after:w-full after:h-full after:absolute after:top-0 after:left-0 after:-z-10;
-  }
-}
-
-@layer utilities {
-  .swiper-padding {
-    padding: 0 3rem !important;
-    padding-bottom: 3rem !important;
-  }
-  .swiper-padding-mobile {
-    padding: 0 !important;
-    padding-bottom: 3rem !important;
-  }
-}
-
 .swiper-pagination-bullet {
   @apply dark:bg-gray-200;
 }
@@ -94,4 +153,12 @@
   .swiper-button-next {
     display: none !important;
   }
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-z-12 {
+  transform: rotateZ(12deg);
 }

@@ -31,7 +31,7 @@ const SocialLinks: React.FC<{ page?: string }> = ({ page }) => {
               {process.env.NEXT_PUBLIC_EMAIL}
             </a>
           </div>
-          <div className="w-40 h-1 bg-bgdark dark:bg-bglight rotate-90"></div>
+          <div className="w-40 h-1 bg-bgdark dark:bg-bglight  rotate-90"></div>
         </div>
       )}
       <div className="hidden fixed right-10 bottom-0 md:flex flex-col w-6 h-[14.5rem] items-center justify-between">
@@ -41,13 +41,13 @@ const SocialLinks: React.FC<{ page?: string }> = ({ page }) => {
               key={social.id}
               title={social.title}
               href={social.link}
-              className="scale-110 rounded link-outline"
+              className="scale-110 rounded-sm link-outline"
             >
               {social.svg}
             </a>
           ))}
         </div>
-        <div className="w-40 h-1 bg-bgdark dark:bg-bglight rotate-90"></div>
+        <div className="w-40 h-1 bg-bgdark dark:bg-bglight  rotate-90"></div>
       </div>
     </>
   );

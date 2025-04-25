@@ -41,7 +41,7 @@ const Blog: NextPage<Props> = ({ posts, category }) => {
       {/* <Loader>
         <span className="capitalize">{unslugify(category)}</span>
       </Loader> */}
-      <div ref={sectionRef} className="bg-bglight dark:bg-bgdark">
+      <div ref={sectionRef} className="bg-bglight dark:bg-bgdark ">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />

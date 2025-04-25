@@ -54,7 +54,7 @@ const BlogLayout: React.FC<Props> = ({ post }) => {
         url={`${process.env.NEXT_PUBLIC_URL}/blog/posts/${post.slug}`}
         meta={post}
       />
-      <div className="bg-bglight dark:bg-bgdark">
+      <div className="bg-bglight dark:bg-bgdark ">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />

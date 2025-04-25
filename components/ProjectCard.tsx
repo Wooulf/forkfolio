@@ -90,7 +90,7 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
       <div className={`project-card project-card-${index}`}>
         <div className="overflow-hidden">
           <div
-            className={`project-image ${project.bgColor} relative aspect-[16/9]`}
+            className={`project-image ${project.bgColor} relative aspect-16/9`}
           >
             {project.image}
           </div>
@@ -180,7 +180,7 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
           {project.tags.map((tag) => (
             <li
               key={tag}
-              className={`project-tags mr-2 my-1 bg-[#E2EFEF] dark:bg-carddark py-1 px-2 rounded`}
+              className={`project-tags mr-2 my-1 bg-[#E2EFEF] dark:bg-carddark py-1 px-2 rounded-sm`}
             >
               {tag}
             </li>

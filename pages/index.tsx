@@ -38,7 +38,7 @@ const Home: NextPage<Props> = ({ blogPosts }) => {
         meta={meta}
       />
       <Loader>Woulf.dev</Loader>
-      <div className="bg-bglight dark:bg-bgdark overflow-hidden">
+      <div className="bg-bglight dark:bg-bgdark  overflow-hidden">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <Header />
