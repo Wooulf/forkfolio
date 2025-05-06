@@ -1,5 +1,76 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/typography";
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 976px;
+  --breakpoint-xl: 1440px;
+
+  --font-*: initial;
+  --font-sans: 'Jost', sans-serif;
+
+  --color-bglight: #f9fafb;
+  --color-bglight-50: rgba(249, 250, 251, 0.5);
+  --color-marrslight: #1c9a9a;
+  --color-marrsgreen: #007a7a;
+  --color-marrsdark: #004d4d;
+  --color-cardlight: #eff3f3;
+  --color-bgdark: #1d2a35;
+  --color-bgdark-60: rgba(29, 42, 53, 0.6);
+  --color-carrilight: #57dcb4;
+  --color-carrigreen: #05ce91;
+  --color-carridark: #00835b;
+  --color-carddark: #22323f;
+  --color-textlight: #f9fafb;
+}
+
+@utility section {
+  @apply py-11 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-20 max-w-6xl mx-auto lg:min-h-[768px];
+}
+
+@utility section-heading {
+  @apply text-2xl md:text-3xl xl:text-4xl inline-block my-6 font-medium;
+}
+
+@utility link-outline {
+  @apply outline-marrsgreen dark:outline-carrigreen;
+}
+
+@utility link {
+  @apply outline-marrsgreen dark:outline-carrigreen text-marrsdark hover:text-marrsgreen dark:text-carrilight dark:hover:text-carrigreen;
+}
+
+@utility blog-main {
+  @apply mb-20 mt-16 min-h-[70vh];
+}
+
+@utility blog-section {
+  @apply py-8 px-4 sm:px-8 md:px-20 max-w-4xl mx-auto;
+}
+
+@utility glassmorphism {
+  @apply bg-clip-padding backdrop-filter backdrop-blur-xl bg-bglight-50! dark:bg-bgdark-60! md:bg-transparent! md:dark:bg-transparent!;
+}
+
+@utility lower-glassmorphism {
+  @apply bg-bglight-50! dark:bg-bgdark-60! after:backdrop-blur-xl! after:w-full after:h-full after:absolute after:top-0 after:left-0 after:-z-10;
+}
+
+@utility swiper-padding {
+  padding: 0 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+@utility swiper-padding-mobile {
+  padding: 0 !important;
+  padding-bottom: 3rem !important;
+}
 
 @custom-variant dark (&:is(.dark *));
 

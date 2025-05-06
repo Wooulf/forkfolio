@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { JSX, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
@@ -130,7 +130,7 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
                 title={`See '${project.title}' on Github`}
                 target="_blank"
                 rel="noreferrer"
-                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen mr-1 rounded-full"
+                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen rounded-full"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +150,7 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
                 title={`See live demo of '${project.title}'`}
                 target="_blank"
                 rel="noreferrer"
-                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen mr-8 rounded-full"
+                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen rounded-full"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
