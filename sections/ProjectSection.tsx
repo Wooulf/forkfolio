@@ -16,10 +16,10 @@ const ProjectSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const elementRef = useRef<HTMLDivElement>(null);
-  const isOnScreen = useOnScreen(elementRef);
+  const isOnScreen = useOnScreen(elementRef as React.RefObject<HTMLDivElement>);
 
   // Set active link for project section
-  const projectSection = useScrollActive(sectionRef);
+  const projectSection = useScrollActive(sectionRef as React.RefObject<HTMLDivElement>);
   const { onSectionChange } = useSection();
   useEffect(() => {
     projectSection && onSectionChange!("projects");

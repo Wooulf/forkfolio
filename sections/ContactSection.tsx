@@ -11,13 +11,13 @@ const ContactSection: React.FC = () => {
   const { theme } = useTheme();
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isSecOnScreen = useOnScreen(sectionRef);
+  const isSecOnScreen = useOnScreen(sectionRef as React.RefObject<HTMLDivElement>);
 
   const elementRef = useRef<HTMLDivElement>(null);
-  const isOnScreen = useOnScreen(elementRef);
+  const isOnScreen = useOnScreen(elementRef as React.RefObject<HTMLDivElement>);
 
   // Set active link for contact section
-  const contactSection = useScrollActive(sectionRef);
+  const contactSection = useScrollActive(sectionRef as React.RefObject<HTMLDivElement>);
   const { onSectionChange } = useSection();
   useEffect(() => {
     contactSection && onSectionChange!("contact");

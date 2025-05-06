@@ -85,7 +85,7 @@ const Header: React.FC = () => {
     <header className="md:flex">
       <div
         ref={mainRef}
-        className={`main-nav lower-glassmorphism bg-bglight dark:bg-bgdark z-30 top-0 shadow-sm fixed duration-400 px-4 sm:px-8 h-16 w-full ${navClassList.join(
+        className={`main-nav lower-glassmorphism bg-bglight dark:bg-bgdark z-30 top-0 shadow-sm fixed px-4 sm:px-8 h-16 w-full ${navClassList.join(
           " "
         )}`}
       >
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
               ref={themeBtnRef}
               // aria-label={theme === "dark" ? "dark" : "light"}
               aria-live="polite"
-              className="w-8 h-8 ml-1 rounded-lg flex justify-center items-center link-outline"
+              className="w-8 h-8 ml-1 rounded-lg flex justify-center items-center link-outline cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

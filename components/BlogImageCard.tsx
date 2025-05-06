@@ -63,7 +63,7 @@ const BlogImageCard: React.FC<Props> = ({
   return (
     <div
       ref={sectionRef}
-      className={`sm:min-w-[17rem] transition translate-y-2 hover:-translate-y-0 max-w-md bg-gray-100 dark:bg-carddark p-4 rounded shadow-md hover:shadow-xl ${
+      className={`sm:min-w-[17rem] transition-[translate,_shadow] translate-y-2 hover:-translate-y-0 max-w-md bg-gray-100 dark:bg-carddark p-4 rounded shadow-md hover:shadow-xl ${
         fullWH ? "w-full" : "w-72 my-2"
       } ${className}`}
     >

@@ -55,7 +55,7 @@
 }
 
 @utility glassmorphism {
-  @apply bg-clip-padding backdrop-filter backdrop-blur-xl bg-bglight-50! dark:bg-bgdark-60!;
+  @apply bg-clip-padding backdrop-filter backdrop-blur-xl bg-bglight-50! dark:bg-bgdark-60! md:bg-transparent! md:dark:bg-transparent!;
 }
 
 @utility lower-glassmorphism {

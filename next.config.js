@@ -16,7 +16,18 @@ module.exports = {
   reactStrictMode: true,
   trailingSlash: false,
   images: {
-    domains: ["media2.dev.to", "dev-to-uploads.s3.amazonaws.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media2.dev.to',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dev-to-uploads.s3.amazonaws.com',
+        pathname: '/**',
+      },
+    ],
   },
   compiler: {
     removeConsole: true,

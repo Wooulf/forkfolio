@@ -32,7 +32,7 @@ const BlogHeader: React.FC = () => {
   return (
     <header className="md:flex">
       <div
-        className={`lower-glassmorphism bg-bglight dark:bg-bgdark z-30 top-0 shadow-sm fixed duration-400 px-4 sm:px-8 h-16 w-full ${navClassList.join(
+        className={`lower-glassmorphism bg-bglight dark:bg-bgdark z-30 top-0 shadow-sm fixed px-4 sm:px-8 h-16 w-full ${navClassList.join(
           " "
         )}`}
       >
@@ -73,7 +73,7 @@ const BlogHeader: React.FC = () => {
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               title="Toggles light & dark theme"
               aria-live="polite"
-              className="w-8 h-8 rounded-lg flex justify-center items-center link-outline"
+              className="w-8 h-8 rounded-lg flex justify-center items-center link-outline cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
