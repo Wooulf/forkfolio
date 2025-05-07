@@ -187,17 +187,42 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    @apply bg-bglight dark:bg-bgdark;
+    @apply bg-bglight;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-[#d5d5d5] dark:bg-carddark;
+    @apply bg-[#d5d5d5];
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#b7b7b7] dark:bg-[#17222b];
+    @apply bg-[#b7b7b7];
+  }
+
+  .dark {
+    ::-webkit-scrollbar-track {
+      @apply bg-bgdark;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #3b556b;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #5b798d;
+    }
+  }
+
+  /* Firefox only */
+  @-moz-document url-prefix() {
+    html {
+      scrollbar-color: #d5d5d5 #f9fafb;
+    }
+
+    html.dark {
+      scrollbar-color: #3b556b #1d2a35;
+    }
   }
 }
 

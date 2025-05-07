@@ -1,5 +1,5 @@
 # Étape 1 — Base d’image pour builder et runner
-FROM node:23-alpine AS base
+FROM node:23.11.0-alpine3.21 AS base
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
