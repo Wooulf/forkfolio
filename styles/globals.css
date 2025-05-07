@@ -179,6 +179,10 @@
     @apply font-sans;
   }
 
+  html, body {
+    @apply h-full;
+  }
+
   /* ===== Custom Scrollbar ===== */
   /* width */
   ::-webkit-scrollbar {
