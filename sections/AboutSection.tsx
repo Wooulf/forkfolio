@@ -15,7 +15,7 @@ import EduGroup from "@/components/EduGroup";
 
 const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isSecOnScreen = useOnScreen(sectionRef);
+  const isSecOnScreen = useOnScreen(sectionRef as React.RefObject<HTMLDivElement>);
 
   useEffect(() => {
     const q = gsap.utils.selector(sectionRef);
@@ -93,7 +93,7 @@ const AboutSection: React.FC = () => {
   const eduRef = useRef<HTMLDivElement>(null);
 
   // Set active link for about section
-  const aboutSection = useScrollActive(sectionRef);
+  const aboutSection = useScrollActive(sectionRef as React.RefObject<HTMLDivElement>);
   const { onSectionChange } = useSection();
   useEffect(() => {
     aboutSection ? onSectionChange!("who am i?") : onSectionChange!("");
@@ -102,7 +102,7 @@ const AboutSection: React.FC = () => {
   return (
     <div
       ref={sectionRef}
-      className="about-panel bg-white dark:bg-[#1B2731] relative"
+      className="about-panel bg-white dark:bg-[#1B2731] relative "
     >
       <section id="whoami" className="section">
         <RoughNotationGroup>

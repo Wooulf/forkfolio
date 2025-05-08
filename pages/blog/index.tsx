@@ -22,7 +22,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
     <>
       <AppHead title="Blog - Corentin Boucard" />
       <Loader>Woulf Blog</Loader>
-      <div className="bg-bglight dark:bg-bgdark min-h-screen">
+      <div className="bg-bglight dark:bg-bgdark  min-h-screen">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />

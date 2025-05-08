@@ -11,7 +11,7 @@ import BlogImageCard from "@/components/BlogImageCard";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
@@ -28,10 +28,10 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const elementRef = useRef<HTMLDivElement>(null);
-  const isOnScreen = useOnScreen(elementRef);
+  const isOnScreen = useOnScreen(elementRef as React.RefObject<HTMLDivElement>);
 
   // Set active link for blog section
-  const blogSection = useScrollActive(sectionRef);
+  const blogSection = useScrollActive(sectionRef as React.RefObject<HTMLDivElement>);
   const { onSectionChange } = useSection();
   useEffect(() => {
     blogSection && onSectionChange!("blog");
