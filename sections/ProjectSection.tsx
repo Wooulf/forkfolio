@@ -8,7 +8,7 @@ import { useSection } from "context/section";
 import useOnScreen from "hooks/useOnScreen";
 import useScrollActive from "hooks/useScrollActive";
 
-import forkfolioImage from "public/projects/forkfolio.webp";
+import forkfolioImage from "@/assets/projects/forkfolio.webp";
 
 const ProjectSection: React.FC = () => {
   const { theme } = useTheme();

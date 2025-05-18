@@ -5,9 +5,6 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import LinkButton from "../components/LinkButton";
 
-import woulf from "../public/woulf-illustration.webp";
-import laptop from "../public/laptop-illustration.webp";
-
 const HeroSection: React.FC = () => {
   const sectionRef = useRef(null);
   const q = gsap.utils.selector(sectionRef);
@@ -97,7 +94,7 @@ const HeroSection: React.FC = () => {
         <div className="relative w-72 md:w-80 h-[20rem] sm:h-[25rem] lg:h-[32rem] flex items-center mx-auto">
           <div className="absolute pointer-events-none scale-90 xs:scale-95 mx-auto">
             <Image
-              src={woulf}
+              src="/woulf-illustration.webp"
               width={1177}
               height={1374}
               priority
@@ -109,7 +106,7 @@ const HeroSection: React.FC = () => {
           </div>
           <div className="laptop absolute bottom-2 sm:bottom-4 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
             <Image
-              src={laptop}
+              src="/laptop-illustration.webp"
               width={559}
               height={386}
               aria-hidden="true"
