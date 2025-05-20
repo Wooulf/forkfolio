@@ -6,6 +6,7 @@ import { ProvideFilter } from "context/filter";
 import { ProvideSection } from "context/section";
 
 import "../styles/globals.css";
+import "highlight.js/styles/github-dark.css"
 
 import gsap from "gsap";
 import Script from "next/script";

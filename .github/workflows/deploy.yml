@@ -24,7 +24,24 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
+      - name: Build Docker image (local only)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true # Charge l’image localement, mais ne la push pas
+          tags: woulf/portfolio:latest
+          secrets: |
+            "devto_token=${{ secrets.DEVTO_API_KEY }}"
+  
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@0.30.0
+        with:
+          image-ref: woulf/portfolio:latest
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: 1
+  
+      - name: Push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
