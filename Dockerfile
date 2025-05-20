@@ -1,14 +1,14 @@
-# Étape 1 — Base d’image pour builder et runner
+# Étape 1 - Base d’image pour builder et runner
 FROM node:23.11.0-alpine3.21 AS base
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Étape 2 — Installation des dépendances
+# Étape 2 - Installation des dépendances
 FROM base AS deps
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Étape 3 — Build avec récupération sécurisée des articles Dev.to
+# Étape 3 - Build avec récupération sécurisée des articles Dev.to
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -17,10 +17,10 @@ ENV NEXT_PUBLIC_URL=https://woulf.fr
 ENV NEXT_PUBLIC_EMAIL=corentinboucardpro@gmail.com
 
 # Injecte le token Dev.to de façon sécurisée uniquement pendant ce RUN
-RUN --mount=type=secret,id=devto_token \
-  DEVTO_API_KEY=$(cat /run/secrets/devto_token) node scripts/fetchDevtoArticles.js && npm run build
+RUN --mount=type=secret,id=devto_token,env=DEVTO_API_KEY \
+  node scripts/fetchDevtoArticles.js && npm run build
 
-# Étape 4 — Image finale minimaliste pour l'exécution
+# Étape 4 - Image finale minimaliste pour l'exécution
 FROM base AS runner
 ENV NODE_ENV=production
 ENV PORT=3000
