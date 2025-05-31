@@ -11,7 +11,7 @@ import BlogImageCard from "@/components/BlogImageCard";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
@@ -28,10 +28,10 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const elementRef = useRef<HTMLDivElement>(null);
-  const isOnScreen = useOnScreen(elementRef);
+  const isOnScreen = useOnScreen(elementRef as React.RefObject<HTMLDivElement>);
 
   // Set active link for blog section
-  const blogSection = useScrollActive(sectionRef);
+  const blogSection = useScrollActive(sectionRef as React.RefObject<HTMLDivElement>);
   const { onSectionChange } = useSection();
   useEffect(() => {
     blogSection && onSectionChange!("blog");
@@ -54,9 +54,10 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
           </RoughNotation>
         </div>
         <div className="text-center mb-8" ref={elementRef}>
-          I write blog posts about what I've done and what I'm doing{" "}
+          J’écris des articles sur ce que j’ai fait et ce que je fais,
           <br className="hidden sm:block" aria-hidden="true" />
-          as a documenting practice. Here are some of my recent blog posts.
+          pour garder une trace et partager mon expérience. Voici quelques-uns
+          de mes derniers articles.
         </div>
         <div>
           <Swiper
@@ -97,7 +98,7 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
           </Swiper>
           <div className="mt-4 text-center">
             <Link href="/blog" className="link">
-              Read all blog posts{" "}
+              Lire tous les posts{" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 inline-block"

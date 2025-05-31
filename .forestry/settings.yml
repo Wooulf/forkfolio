@@ -19,8 +19,8 @@ use_front_matter_path: false
 file_template: ":filename:"
 build:
   preview_env:
-  - NEXT_PUBLIC_URL=https://satnaing.dev
-  - NEXT_PUBLIC_EMAIL=satnaing.dev@gmail.com
+  - NEXT_PUBLIC_URL=https://woulf.fr
+  - NEXT_PUBLIC_EMAIL=corentinboucardpro@gmail.com
   preview_output_directory: ".next"
   install_dependencies_command: npm install
   preview_docker_image: forestryio/node:16

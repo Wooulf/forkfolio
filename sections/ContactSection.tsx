@@ -11,13 +11,13 @@ const ContactSection: React.FC = () => {
   const { theme } = useTheme();
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isSecOnScreen = useOnScreen(sectionRef);
+  const isSecOnScreen = useOnScreen(sectionRef as React.RefObject<HTMLDivElement>);
 
   const elementRef = useRef<HTMLDivElement>(null);
-  const isOnScreen = useOnScreen(elementRef);
+  const isOnScreen = useOnScreen(elementRef as React.RefObject<HTMLDivElement>);
 
   // Set active link for contact section
-  const contactSection = useScrollActive(sectionRef);
+  const contactSection = useScrollActive(sectionRef as React.RefObject<HTMLDivElement>);
   const { onSectionChange } = useSection();
   useEffect(() => {
     contactSection && onSectionChange!("contact");
@@ -42,15 +42,15 @@ const ContactSection: React.FC = () => {
       </div>
       <div className="mt-8 mb-20">
         <h3 className="font-medium text-lg mb-2 md:text-3xl" ref={elementRef}>
-          Let's be awesome together!
+          Construisons quelque chose de génial ensemble !
         </h3>
         <p className="mb-6 mx-auto max-w-lg md:mb-10 lg:leading-loose">
-          As a dev, I am driven by my love for coding and my desire for new
-          challenges. If you have opportunities for collaboration or want to
-          build something amazing, don't hesitate to contact me!
+          En tant que développeur, je suis motivé par ma passion du code et ma
+          soif de nouveaux défis. Si vous avez une opportunité de collaboration
+          ou une idée à concrétiser, n’hésitez pas à me contacter !
         </p>
         <LinkButton href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}>
-          Get in touch!
+          Me contacter
         </LinkButton>
       </div>
     </section>

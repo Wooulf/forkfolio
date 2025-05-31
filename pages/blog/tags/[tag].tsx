@@ -36,8 +36,8 @@ const Blog: NextPage<Props> = ({ posts, tag }) => {
 
   return (
     <>
-      <AppHead title="Blog - Sat Naing" />
-      <div ref={sectionRef} className="bg-bglight dark:bg-bgdark">
+      <AppHead title="Blog - Woulf" />
+      <div ref={sectionRef} className="bg-bglight dark:bg-bgdark ">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />

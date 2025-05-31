@@ -41,22 +41,23 @@ const BlogHeroSection: React.FC = () => {
       <div className="mt-10">
         <div className="overflow-hidden py-1">
           <h1 className="main-header text-4xl lg:text-5xl font-bold">
-            Sat Naing's{" "}
-            <span className="text-marrsgreen dark:text-carrigreen">Blog</span>
+            <span className="text-marrsgreen dark:text-carrigreen">Blog</span>{" "}
+            de Woulf
           </h1>
         </div>
         <div>
           <p className="intro-1 mt-4 mb-2">
-            Hello, everyone! Welcome to my personal blog.
+            Bonjour à tous ! Bienvenue sur mon blog perso.
           </p>
           <p className="intro-2">
-            In this blog, I will be writing about my projects (what I do/how I
-            did), my personal experiences, and some random stuffs.
+            Dans ce blog, j'écrirai à propos de mes projets (ce que je
+            fais/comment je l'ai fais), mes expériences personnelles, et
+            quelques trucs plus aléatoires.
           </p>
           <p className="intro-3">
-            You can follow me on my social media and{" "}
-            <a href="https://github.com/satnaing" className="link">
-              Github account.
+            Vous pouvez me suivre sur mes réseaux sociaux et mon{" "}
+            <a href="https://github.com/wooulf" className="link">
+              compte Github.
             </a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +82,7 @@ const BlogHeroSection: React.FC = () => {
           className="placeholder:italic placeholder:text-opacity-75 py-3 pr-14 pl-5 
                     block bg-cardlight dark:bg-carddark w-full rounded shadow-md
                     border border-cardlight dark:border-carddark border-opacity-40 
-                    focus:outline-none focus:border-marrslight focus:dark:border-carrilight"
+                    focus:outline-hidden focus:border-marrslight dark:focus:border-carrilight"
           placeholder="Search for anything..."
           type="text"
           name="search"
@@ -102,7 +103,7 @@ const BlogHeroSection: React.FC = () => {
           </svg>
         </span>
       </label>
-      <div className="flex items-center my-4 md:my-6">
+      {/* <div className="flex items-center my-4 md:my-6">
         <label htmlFor="language" className="mr-2 flex items-center gap-x-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +133,7 @@ const BlogHeroSection: React.FC = () => {
           <option value="English">English</option>
           <option value="Myanmar">Myanmar</option>
         </select>
-      </div>
+      </div> */}
     </section>
   );
 };

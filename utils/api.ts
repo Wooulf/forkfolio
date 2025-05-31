@@ -47,11 +47,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     }
 
     if (typeof data[field] !== "undefined") {
-      if (field === "datetime") {
-        items[field] = '"' + data[field] + '"';
-      } else {
-        items[field] = data[field];
-      }
+      items[field] = data[field];
     }
   });
 

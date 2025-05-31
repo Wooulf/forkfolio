@@ -14,7 +14,7 @@ const navLinks = [
         <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z" />
       </svg>
     ),
-    text: "Who am i?",
+    text: "Qui suis-je ?",
   },
   {
     url: "#projects",
@@ -23,7 +23,7 @@ const navLinks = [
         <path d="m7.375 16.781 1.25-1.562L4.601 12l4.024-3.219-1.25-1.562-5 4a1 1 0 0 0 0 1.562l5 4zm9.25-9.562-1.25 1.562L19.399 12l-4.024 3.219 1.25 1.562 5-4a1 1 0 0 0 0-1.562l-5-4zm-1.649-4.003-4 18-1.953-.434 4-18z" />
       </svg>
     ),
-    text: "Projects",
+    text: "Projets",
   },
   {
     url: "#blog",
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
     const _classList = [];
 
     if (scroll.y > 150 && scroll.y - scroll.lastY > 0)
-      _classList.push("!shadow-md");
+      _classList.push("shadow-md!");
 
     setNavClassList(_classList);
   }, [scroll.y, scroll.lastY]);
@@ -85,7 +85,7 @@ const Header: React.FC = () => {
     <header className="md:flex">
       <div
         ref={mainRef}
-        className={`main-nav lower-glassmorphism bg-bglight dark:bg-bgdark z-30 top-0 shadow-sm fixed duration-400 px-4 sm:px-8 h-16 w-full ${navClassList.join(
+        className={`main-nav lower-glassmorphism bg-bglight dark:bg-bgdark z-30 top-0 shadow-sm fixed px-4 sm:px-8 h-16 w-full ${navClassList.join(
           " "
         )}`}
       >
@@ -94,11 +94,11 @@ const Header: React.FC = () => {
             href="/"
             className="text-xl sm:text-2xl md:hover:text-marrsgreen dark:md:hover:text-carrigreen focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen"
           >
-            SatNaing
+            Woulf
             <span className="text-marrsgreen dark:text-carrigreen">.dev</span>
           </Link>
           <nav className="flex items-center">
-            <div className="glassmorphism md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none fixed md:static bottom-4 z-30 left-1/2 md:left-auto transform -translate-x-1/2 md:transform-none bg-bglight dark:bg-carddark dark:text-textlight w-11/12 rounded drop-shadow-lg md:drop-shadow-none">
+            <div className="glassmorphism md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none fixed md:static bottom-4 z-30 left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0 bg-bglight dark:bg-carddark dark:text-textlight w-11/12 rounded-sm drop-shadow-lg md:drop-shadow-none">
               <ul className="flex justify-evenly items-center py-1">
                 {navLinks.map((navLink) => (
                   <li key={navLink.url}>
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
               ref={themeBtnRef}
               // aria-label={theme === "dark" ? "dark" : "light"}
               aria-live="polite"
-              className="w-8 h-8 ml-1 rounded-lg flex justify-center items-center link-outline"
+              className="w-8 h-8 ml-1 rounded-lg flex justify-center items-center link-outline cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

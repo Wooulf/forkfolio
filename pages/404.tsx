@@ -11,11 +11,11 @@ const Home: NextPage = () => {
   return (
     <>
       <AppHead
-        title="Sat Naing - A Full-stack Developer"
+        title="Corentin Boucard - Backend Developer | DevOps Enthusiast"
         url={`${process.env.NEXT_PUBLIC_URL}`}
         meta={meta}
       />
-      <div className="bg-bglight dark:bg-bgdark overflow-hidden">
+      <div className="bg-bglight dark:bg-bgdark  overflow-hidden">
         <div className="h-screen flex flex-col justify-center selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <div className="flex justify-center items-center flex-col mt-auto">
             <h1 className="text-8xl xs:text-9xl font-bold text-marrsgreen dark:text-carrigreen">

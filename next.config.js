@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
 
 module.exports = {
   async redirects() {
@@ -11,16 +12,32 @@ module.exports = {
       },
     ];
   },
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.resolve(__dirname, ".");
+    return config;
+  },
   // Append the default value with md extensions
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx", "html"],
   reactStrictMode: true,
   trailingSlash: false,
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media2.dev.to',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dev-to-uploads.s3.amazonaws.com',
+        pathname: '/**',
+      },
+    ],
   },
   compiler: {
     removeConsole: true,
   },
+  output: 'standalone',
 };
 
 // const nextConfig = {
