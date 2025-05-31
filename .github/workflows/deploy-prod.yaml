@@ -44,8 +44,12 @@ jobs:
       - name: Pull temp image
         run: docker pull ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }}
 
-      - name: Tag image as tag version
-        run: docker tag ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }} ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.clean_tag }}
+      - name: Tag image as tag version (and latest)
+        run: |
+          docker tag ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }} ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.clean_tag }}
+          docker tag ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }} ${{ env.IMAGE_NAME }}:latest
 
-      - name: Push version tag
-        run: docker push ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.clean_tag }}
+      - name: Push version tag (and latest)
+        run: |
+          docker push ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.clean_tag }}
+          docker push ${{ env.IMAGE_NAME }}:latest
