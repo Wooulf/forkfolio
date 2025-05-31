@@ -1,0 +1,38 @@
+name: Deploy RC
+
+on:
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: woulf/portfolio
+
+jobs:
+  tag_image:
+    name: Tag & Push rc-latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel if not main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "::error ::This workflow can only be executed from main branch"
+          exit 1
+
+      - name: Get short SHA
+        id: sha
+        run: echo "sha_short=$(echo $GITHUB_SHA | cut -c1-7)" >> "$GITHUB_OUTPUT"
+        
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Pull temp image
+        run: docker pull ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }}
+
+      - name: Tag image as rc-latest
+        run: docker tag ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }} ${{ env.IMAGE_NAME }}:rc-latest
+
+      - name: Push rc-latest tag
+        run: docker push ${{ env.IMAGE_NAME }}:rc-latest

@@ -1,0 +1,32 @@
+name: Deploy dev
+
+on:
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: woulf/portfolio
+
+jobs:
+  tag_image:
+    name: Tag & Push dev-latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get short SHA
+        id: sha
+        run: echo "sha_short=$(echo $GITHUB_SHA | cut -c1-7)" >> "$GITHUB_OUTPUT"
+        
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Pull temp image
+        run: docker pull ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }}
+
+      - name: Tag image as dev-latest
+        run: docker tag ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }} ${{ env.IMAGE_NAME }}:dev-latest
+
+      - name: Push dev-latest tag
+        run: docker push ${{ env.IMAGE_NAME }}:dev-latest
