@@ -12,13 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel if not on main and not tagged
+      - name: Cancel if commit is not tagged
         run: |
-          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
-            echo "::error ::This workflow can only be executed from main branch"
-            exit 1
-          fi
-
           if ! git describe --exact-match --tags HEAD >/dev/null 2>&1; then
             echo "::error ::This commit has no tag"
             exit 1
