@@ -8,15 +8,28 @@ env:
 
 jobs:
   tag_image:
-    name: Tag & Push rc-latest
+    name: Tag & Push rc with tag version
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cancel if not main
-        if: github.ref != 'refs/heads/main'
+      - name: Cancel if not on main and not tagged
         run: |
-          echo "::error ::This workflow can only be executed from main branch"
-          exit 1
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "::error ::This workflow can only be executed from main branch"
+            exit 1
+          fi
+
+          if ! git describe --exact-match --tags HEAD >/dev/null 2>&1; then
+            echo "::error ::This commit has no tag"
+            exit 1
+          fi
+
+      - name: Extract tag without "v"
+        id: version
+        run: |
+          TAG=$(git describe --exact-match --tags HEAD)
+          CLEAN_TAG=${TAG#v}
+          echo "clean_tag=$CLEAN_TAG" >> "$GITHUB_OUTPUT"
 
       - name: Get short SHA
         id: sha
@@ -31,8 +44,8 @@ jobs:
       - name: Pull temp image
         run: docker pull ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }}
 
-      - name: Tag image as rc-latest
-        run: docker tag ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }} ${{ env.IMAGE_NAME }}:rc-latest
+      - name: Tag image as X.Y.Z-rc
+        run: docker tag ${{ env.IMAGE_NAME }}:temp-${{ steps.sha.outputs.sha_short }} ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.clean_tag }}-rc
 
-      - name: Push rc-latest tag
-        run: docker push ${{ env.IMAGE_NAME }}:rc-latest
+      - name: Push tag
+        run: docker push ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.clean_tag }}-rc
