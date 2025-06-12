@@ -2,9 +2,6 @@ name: Deploy prod
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
 
 env:
   IMAGE_NAME: woulf/portfolio
