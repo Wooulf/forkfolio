@@ -5,6 +5,7 @@ import shell from 'highlight.js/lib/languages/shell';
 import dockerfile from 'highlight.js/lib/languages/dockerfile';
 import yaml from 'highlight.js/lib/languages/yaml';
 import ini from 'highlight.js/lib/languages/ini';
+import json from 'highlight.js/lib/languages/json';
 
 const options = {
   languages: {
@@ -13,6 +14,7 @@ const options = {
     dockerfile,
     yaml,
     ini,
+    json,
   },
 };
 

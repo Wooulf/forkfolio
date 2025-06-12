@@ -120,8 +120,8 @@ export const getStaticProps: GetStaticProps = async () => {
   let categorizedPosts: CategorizedPosts = {};
   posts.forEach((post) => {
     if (categorizedPosts[post.category as string]) {
-      categorizedPosts[post.category as string].length <= 4 &&
-        categorizedPosts[post.category as string].push(post);
+      // categorizedPosts[post.category as string].length <= 4 &&
+      categorizedPosts[post.category as string].push(post);
     } else {
       categorizedPosts[post.category as string] = [post];
     }

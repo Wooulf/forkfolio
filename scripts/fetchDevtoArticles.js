@@ -43,7 +43,7 @@ async function fetchDevtoArticles() {
   return res.json();
 }
 
-const isFeatured = (article) => article.slug.includes('<!-- featured -->');
+const isFeatured = (article) => article.body_markdown.includes('<!-- featured -->');
 
 async function saveArticles(articles) {
   await fs.ensureDir(OUTPUT_DIR);
@@ -68,7 +68,7 @@ async function saveArticles(articles) {
       excerpt: getFirstLine(article.body_markdown),
       slug: article.slug,
       featured: isFeatured(article),
-      category: 'DevOps & Développement',
+      category: 'DevOps',
       language: 'French',
     };
 
