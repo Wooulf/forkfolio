@@ -43,7 +43,7 @@ async function fetchDevtoArticles() {
   return res.json();
 }
 
-const isFeatured = (article) => article.slug.includes('article-1');
+const isFeatured = (article) => article.slug.includes('<!-- featured -->');
 
 async function saveArticles(articles) {
   await fs.ensureDir(OUTPUT_DIR);
