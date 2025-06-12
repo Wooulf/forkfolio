@@ -44,7 +44,7 @@ const AppHead: React.FC<Props> = ({
   }
 
   let appOgImage = `${process.env.NEXT_PUBLIC_URL}/woulf-blog-og.png`;
-  let appOgImageAlt = "Sat Naing's Blog";
+  let appOgImageAlt = "Woulf's Blog";
 
   if (ogImage) {
     appOgImage = ogImage;
