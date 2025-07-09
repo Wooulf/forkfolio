@@ -7,11 +7,11 @@ interface FilterInitialType {
   onLanguageChange?: (val: LanguageType) => void;
 }
 
-export type LanguageType = "All" | "English" | "Myanmar";
+export type LanguageType = "all" | "en" | "fr";
 
 export const filterContext = createContext<FilterInitialType>({
   searchText: "",
-  postLanguage: "All",
+  postLanguage: "all",
 });
 
 export const ProvideFilter = ({ children }: { children: React.ReactNode }) => {
@@ -25,7 +25,7 @@ export const useFilter = () => useContext(filterContext);
 
 const useProvideFilter = () => {
   const [searchText, setSearchText] = useState("");
-  const [postLanguage, setPostLanguage] = useState<LanguageType>("All");
+  const [postLanguage, setPostLanguage] = useState<LanguageType>("en");
 
   const onSearch = (val: string) => {
     setSearchText(val);

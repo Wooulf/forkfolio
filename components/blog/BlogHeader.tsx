@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import useScrollListener from "../../hooks/useScrollListener";
+import LangSwitch from "../LangSwitch";
 
 const BlogHeader: React.FC = () => {
   const router = useRouter();
@@ -65,6 +66,7 @@ const BlogHeader: React.FC = () => {
                     </Link>
                   </li>
                 ))}
+                <LangSwitch />
               </ul>
             </div>
             <button

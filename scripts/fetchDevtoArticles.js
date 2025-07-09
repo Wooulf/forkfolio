@@ -28,6 +28,17 @@ function getFirstLine(markdown) {
   return firstLine.replace(/^_(.*?)_$/, '$1');
 }
 
+function extractMetaFromBody(bodyMarkdown) {
+  const match = bodyMarkdown.match(/<!--\s*meta:\s*(\{.*?\})\s*-->/i);
+  if (!match) return null;
+  try {
+    return JSON.parse(match[1]);
+  } catch (e) {
+    console.warn('⚠️ meta mal formé :', match[1]);
+    return null;
+  }
+}
+
 
 async function fetchDevtoArticles() {
   const res = await fetch('https://dev.to/api/articles/me', {
@@ -49,6 +60,12 @@ async function saveArticles(articles) {
   await fs.ensureDir(OUTPUT_DIR);
 
   for (const article of articles) {
+    const meta = extractMetaFromBody(article.body_markdown);
+    if (!meta || !meta.id || !meta.lang) {
+      console.warn(`⚠️ Article ${article.slug} sans meta ou meta incomplet → ignoré.`);
+      continue;
+    }
+    
     const filename = `${article.slug}.md`;
     const filepath = path.join(OUTPUT_DIR, filename);
 
@@ -69,7 +86,8 @@ async function saveArticles(articles) {
       slug: article.slug,
       featured: isFeatured(article),
       category: 'DevOps',
-      language: 'French',
+      language: meta.lang,
+      metaId: meta.id
     };
 
     const markdown = matter.stringify(article.body_markdown, frontmatter);

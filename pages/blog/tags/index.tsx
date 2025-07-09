@@ -10,14 +10,29 @@ import Tag from "@/components/blog/Tag";
 import Footer from "@/components/Footer";
 import { getAllPosts } from "utils/api";
 import Loader from "@/components/Loader";
+import { useFilter } from "@/context/filter";
+import { MdxMeta } from "../posts/[slug]";
 
 type Props = {
-  tags: string[];
-  tagCounts: { [key: string]: number };
+  posts: MdxMeta[];
 };
 
-const Blog: NextPage<Props> = ({ tags, tagCounts }) => {
+const Blog: NextPage<Props> = ({posts}) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { searchText, postLanguage } = useFilter();
+
+  let tags: string[] = [];
+  for (let post of posts) {
+    if (post.tags && post.language === postLanguage) tags.push(...(post.tags as string[]));
+  }
+
+  const tagCounts: { [key: string]: number } = {};
+
+  for (const tag of tags) {
+    tagCounts[tag] = tagCounts[tag] ? tagCounts[tag] + 1 : 1;
+  }
+
+  tags = tags.filter((x, i, a) => a.indexOf(x) == i);
 
   // Animations
   useEffect(() => {
@@ -68,25 +83,14 @@ const Blog: NextPage<Props> = ({ tags, tagCounts }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getAllPosts(["tags"]);
-
-  let tags: string[] = [];
-  for (let post of posts) {
-    if (post.tags) tags.push(...(post.tags as string[]));
-  }
-
-  const tagCounts: { [key: string]: number } = {};
-
-  for (const tag of tags) {
-    tagCounts[tag] = tagCounts[tag] ? tagCounts[tag] + 1 : 1;
-  }
-
-  tags = tags.filter((x, i, a) => a.indexOf(x) == i);
+  const posts = getAllPosts([
+    "tags",
+    "language",
+  ]);
 
   return {
     props: {
-      tags,
-      tagCounts,
+      posts,
     },
   };
 };

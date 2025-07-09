@@ -17,12 +17,14 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useFilter } from "@/context/filter";
 
 type Props = {
   posts: MdxMeta[];
 };
 
 const BlogSection: React.FC<Props> = ({ posts }) => {
+  const { searchText, postLanguage } = useFilter();
   const { theme } = useTheme();
 
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -85,7 +87,12 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
               },
             }}
           >
-            {posts.map((post, index) => (
+            {posts
+            .filter(({ language }) => {
+              if (postLanguage === "all") return true;
+                return language === postLanguage;
+              })
+            .map((post, index) => (
               <SwiperSlide key={post.slug} tag="li">
                 <BlogImageCard
                   post={post}

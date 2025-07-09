@@ -10,6 +10,7 @@ import BlogCard from "@/components/BlogCard";
 import Footer from "@/components/Footer";
 import { getAllPosts, getAllTagPosts } from "utils/api";
 import { MdxMeta } from "../posts/[slug]";
+import { useFilter } from "@/context/filter";
 
 type Props = {
   posts: MdxMeta[];
@@ -18,6 +19,7 @@ type Props = {
 
 const Blog: NextPage<Props> = ({ posts, tag }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { searchText, postLanguage } = useFilter();
 
   // Animations
   useEffect(() => {
@@ -48,7 +50,11 @@ const Blog: NextPage<Props> = ({ posts, tag }) => {
                 <span className="tag-title block">Tag: {tag}</span>
               </h1>
               <ul>
-                {posts.map((post) => (
+                {posts.filter(({ language }) => {
+                    if (postLanguage === "all") return true;
+                    return language === postLanguage;
+                  })
+                  .map((post) => (
                   <BlogCard post={post} key={post.slug} />
                 ))}
               </ul>
@@ -63,7 +69,7 @@ const Blog: NextPage<Props> = ({ posts, tag }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const posts = getAllTagPosts(
-    ["slug", "title", "excerpt", "datetime", "category"],
+    ["slug", "title", "excerpt", "datetime", "category", "language"],
     params!.tag as string
   );
 

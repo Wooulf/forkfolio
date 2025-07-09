@@ -13,6 +13,7 @@ import Loader from "@/components/Loader";
 import { getAllPosts } from "utils/api";
 import slugify from "utils/slugify";
 import { MdxMeta } from "../posts/[slug]";
+import { useFilter } from "@/context/filter";
 
 type CategorizedPosts = {
   [key: string]: {
@@ -27,6 +28,7 @@ type Props = {
 };
 
 const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
+  const { searchText, postLanguage } = useFilter();
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // Animations
@@ -88,7 +90,11 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
                     </h2>
                   </Link>
                   <ul className="flex space-x-4 overflow-x-auto overflow-y-hidden snap-x touch-auto">
-                    {categorizedPosts[category].map((post: any) => (
+                    {categorizedPosts[category].filter(({ language }) => {
+                      if (postLanguage === "all") return true;
+                      return language === postLanguage;
+                    })
+                    .map((post: any) => (
                       <BlogCardBox post={post} key={post.slug} />
                     ))}
                   </ul>
@@ -110,6 +116,7 @@ export const getStaticProps: GetStaticProps = async () => {
     "excerpt",
     "datetime",
     "category",
+    "language",
   ]);
   // get category array ['cate1', 'cate2']
   const categories = posts
