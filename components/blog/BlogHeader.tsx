@@ -48,6 +48,7 @@ const BlogHeader: React.FC = () => {
           <nav className="flex items-center">
             <div className="glassmorphism md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none fixed md:static bottom-4 z-30 left-1/2 md:left-auto transform -translate-x-1/2 md:-translate-x-0 bg-bglight dark:bg-carddark dark:text-textlight w-11/12 rounded-sm drop-shadow-lg md:drop-shadow-none">
               <ul className="flex justify-evenly items-center py-1">
+                <li className="mr-4"><LangSwitch /></li>
                 {navLinks.map((navLink) => (
                   <li
                     key={navLink.url}
@@ -66,7 +67,6 @@ const BlogHeader: React.FC = () => {
                     </Link>
                   </li>
                 ))}
-                <LangSwitch />
               </ul>
             </div>
             <button

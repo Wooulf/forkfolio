@@ -1,27 +1,32 @@
-import { useFilter } from "@/context/filter";
+import { LanguageType, useFilter } from "@/context/filter";
 
 const LangSwitch = () => {
     const { postLanguage, onLanguageChange } = useFilter();
+    const languages: LanguageType[] = ["fr", "en"];
   
     return (
-      <div className="ml-4 flex gap-2">
-        <button
-          onClick={() => onLanguageChange?.("fr")}
-          className={`px-2 py-1 text-sm rounded ${
-            postLanguage === "fr" ? "bg-black text-white" : "bg-gray-200"
-          }`}
-        >
-          FR
-        </button>
-        <button
-          onClick={() => onLanguageChange?.("en")}
-          className={`px-2 py-1 text-sm rounded ${
-            postLanguage === "en" ? "bg-black text-white" : "bg-gray-200"
-          }`}
-        >
-          EN
-        </button>
-      </div>
+      <div className="z-50 flex gap-2 bg-bglight/80 dark:bg-bgdark/80 p-2 rounded shadow dark:shadow-black/50">
+      {languages.map((lang) => {
+        const isActive = postLanguage === lang;
+        const baseClasses = "px-2 py-1 text-sm rounded transition-colors";
+        const activeClasses =
+          "bg-bgdark text-textlight dark:bg-bglight dark:text-black";
+        const inactiveClasses =
+          "bg-bglight dark:bg-bgdark dark:text-textlight";
+
+        return (
+          <button
+            key={lang}
+            onClick={() => onLanguageChange?.(lang)}
+            className={`${baseClasses} ${
+              isActive ? activeClasses : inactiveClasses
+            }`}
+          >
+            {lang.toUpperCase()}
+          </button>
+        );
+      })}
+    </div>
     );
   };
 

@@ -51,7 +51,6 @@ const Blog: NextPage<Props> = ({ posts, tag }) => {
               </h1>
               <ul>
                 {posts.filter(({ language }) => {
-                    if (postLanguage === "all") return true;
                     return language === postLanguage;
                   })
                   .map((post) => (

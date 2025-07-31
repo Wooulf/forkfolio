@@ -14,6 +14,8 @@ import PostBody from "@/components/blog/PostBody";
 import Tag from "@/components/blog/Tag";
 import DateTime from "@/components/DateTime";
 import HeadCategory from "@/components/blog/HeadCategory";
+import { LanguageType, useFilter } from "@/context/filter";
+import Link from "next/link";
 
 export interface MdxMeta extends Meta {
   title: string;
@@ -32,22 +34,24 @@ export interface MdxMeta extends Meta {
 
 type Props = {
   post: MdxMeta;
+  slugByLang: Record<LanguageType, string>;
 };
 
-const BlogLayout: React.FC<Props> = ({ post }) => {
+const BlogLayout: React.FC<Props> = ({ post, slugByLang }) => {
+  const { postLanguage, onLanguageChange } = useFilter();
   const { theme } = useTheme();
   const postUrl = `${process.env.NEXT_PUBLIC_URL}/blog/posts/${post.slug}`;
   return (
     <>
       {/* Facebook Plugin for comment & share */}
-      <div id="fb-root"></div>
+      {/* <div id="fb-root"></div>
       <Script
         async
         defer
         crossOrigin="anonymous"
         src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v13.0&appId=3098460656840262&autoLogAppEvents=1"
         nonce="BwXXZ73U"
-      />
+      /> */}
 
       <AppHead
         title={`${post.title} - Woulf`}
@@ -102,7 +106,7 @@ const BlogLayout: React.FC<Props> = ({ post }) => {
               ></div> */}
 
               {/* Facebook Share Button */}
-              <div
+              {/* <div
                 className="fb-share-button my-4"
                 data-href={postUrl}
                 data-layout="button"
@@ -118,7 +122,20 @@ const BlogLayout: React.FC<Props> = ({ post }) => {
                 >
                   Share
                 </a>
-              </div>
+              </div> */}
+              {postLanguage &&
+                postLanguage !== post.language &&
+                slugByLang[postLanguage] && (
+                  <div className="sticky bottom-7 z-40 flex justify-center">
+                    <Link
+                      href={`/blog/posts/${slugByLang[postLanguage]}`}
+                      className="inline-block bg-marrsgreen text-bglight dark:bg-carrigreen dark:text-bgdark font-medium px-4 py-2 rounded hover:opacity-90"
+                    >
+                      Lire cet article en {postLanguage === "fr" ? "français" : "anglais"}
+                    </Link>
+                  </div>
+                )}
+
             </article>
           </main>
           <Footer />
@@ -144,8 +161,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     "category",
     "tags",
     "type",
+    "language",
+    "metaId",
   ]);
   const content = await markdownToHtml((post.content as string) || "");
+
+  const allPosts = getAllPosts(["slug", "metaId", "language"]);
+
+  const slugByLang = allPosts
+    .filter(p => p.metaId === post.metaId)
+    .reduce((acc, p) => {
+      acc[p.language as LanguageType] = p.slug;
+      return acc;
+    }, {} as Record<LanguageType, string>);
 
   return {
     props: {
@@ -153,6 +181,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         ...post,
         content,
       },
+      slugByLang,
     },
   };
 };

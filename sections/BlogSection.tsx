@@ -89,7 +89,6 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
           >
             {posts
             .filter(({ language }) => {
-              if (postLanguage === "all") return true;
                 return language === postLanguage;
               })
             .map((post, index) => (

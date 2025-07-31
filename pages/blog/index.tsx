@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import { getAllPosts } from "utils/api";
 import { useFilter } from "context/filter";
 import Loader from "@/components/Loader";
+import LangSwitch from "@/components/LangSwitch";
 
 type Props = {
   posts: MdxMeta[];
@@ -26,6 +27,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />
+          <LangSwitch />
           <SocialLinks />
           <main id="main" className="mb-20">
             <BlogHeroSection />
@@ -35,7 +37,6 @@ const Blog: NextPage<Props> = ({ posts }) => {
                   <h2 className="text-2xl font-medium mb-2">Featured Posts</h2>
                   <ul>
                     {posts.filter(({ language }) => {
-                      if (postLanguage === "all") return true;
                       return language === postLanguage;
                     })
                     .map(
@@ -56,8 +57,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
               <h2 className="text-2xl font-medium mb-2">
                 {/* {searchText === "" && postLanguage === "all" && "All Posts"} */}
                 {searchText !== "" && <div>Search result(s)</div>}
-                {postLanguage !== "all" &&
-                  `All posts written in '${postLanguage}' language`}
+                {`All posts written in '${postLanguage}' language`}
               </h2>
               <ul>
                 {posts
@@ -65,7 +65,6 @@ const Blog: NextPage<Props> = ({ posts }) => {
                     title.toLowerCase().includes(searchText.toLowerCase())
                   )
                   .filter(({ language }) => {
-                    if (postLanguage === "all") return true;
                     return language === postLanguage;
                   })
                   .map((post) => (

@@ -12,7 +12,6 @@ import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import { getAllPosts } from "utils/api";
 import slugify from "utils/slugify";
-import { MdxMeta } from "../posts/[slug]";
 import { useFilter } from "@/context/filter";
 
 type CategorizedPosts = {
@@ -91,7 +90,6 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
                   </Link>
                   <ul className="flex space-x-4 overflow-x-auto overflow-y-hidden snap-x touch-auto">
                     {categorizedPosts[category].filter(({ language }) => {
-                      if (postLanguage === "all") return true;
                       return language === postLanguage;
                     })
                     .map((post: any) => (
