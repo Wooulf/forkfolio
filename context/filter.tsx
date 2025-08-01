@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 export type LanguageType = "en" | "fr";
 
@@ -28,47 +29,26 @@ export const ProvideFilter = ({ children }: { children: React.ReactNode }) => {
 
 export const useFilter = () => useContext(filterContext);
 
-const detectBrowserLang = (): LanguageType => {
-  if (typeof navigator === "undefined") return "en";
-  const l = navigator.language?.slice(0, 2).toLowerCase();
-  return l === "fr" ? "fr" : "en";
-};
-
 const useProvideFilter = () => {
+  const { i18n } = useTranslation();
   const [searchText, setSearchText] = useState("");
   // Important : valeur initiale fixe côté SSR, puis on corrige au mount
   const [postLanguage, setPostLanguage] = useState<LanguageType>("en");
   const [mounted, setMounted] = useState(false);
 
-  // Au mount (client), récupère la préférence stockée ou sinon la langue du navigateur
+  // Dès le mount, on récupère la langue depuis i18n (qui lit localStorage automatiquement)
   useEffect(() => {
-    try {
-      const stored = typeof window !== "undefined" ? localStorage.getItem(LANG_STORAGE_KEY) : null;
-      const initial =
-        stored === "fr" || stored === "en" ? (stored as LanguageType) : detectBrowserLang();
+    setPostLanguage(i18n.language as LanguageType);
+    setMounted(true);
+  }, [i18n.language]);
 
-      setPostLanguage(initial);
-    } catch {
-      // si localStorage n'est pas dispo, fallback navigateur
-      setPostLanguage(detectBrowserLang());
-    } finally {
-      setMounted(true);
-    }
-  }, []);
-
-  // Persiste toute mise à jour de la langue
-  useEffect(() => {
-    try {
-      if (typeof window !== "undefined") {
-        localStorage.setItem(LANG_STORAGE_KEY, postLanguage);
-      }
-    } catch {
-      // ignore
-    }
-  }, [postLanguage]);
+  // Permet de changer la langue *et* de déclencher les effets associés
+  const onLanguageChange = useCallback((val: LanguageType) => {
+    i18n.changeLanguage(val);
+    setPostLanguage(val);
+  }, [i18n]);
 
   const onSearch = useCallback((val: string) => setSearchText(val), []);
-  const onLanguageChange = useCallback((val: LanguageType) => setPostLanguage(val), []);
 
   return {
     searchText,

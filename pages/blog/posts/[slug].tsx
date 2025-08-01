@@ -16,6 +16,7 @@ import DateTime from "@/components/DateTime";
 import HeadCategory from "@/components/blog/HeadCategory";
 import { LanguageType, useFilter } from "@/context/filter";
 import Link from "next/link";
+import { useTranslation } from 'react-i18next';
 
 export interface MdxMeta extends Meta {
   title: string;
@@ -41,6 +42,7 @@ const BlogLayout: React.FC<Props> = ({ post, slugByLang }) => {
   const { postLanguage, onLanguageChange } = useFilter();
   const { theme } = useTheme();
   const postUrl = `${process.env.NEXT_PUBLIC_URL}/blog/posts/${post.slug}`;
+  const { t } = useTranslation();
   return (
     <>
       {/* Facebook Plugin for comment & share */}
@@ -130,8 +132,11 @@ const BlogLayout: React.FC<Props> = ({ post, slugByLang }) => {
                     <Link
                       href={`/blog/posts/${slugByLang[postLanguage]}`}
                       className="inline-block bg-marrsgreen text-bglight dark:bg-carrigreen dark:text-bgdark font-medium px-4 py-2 rounded hover:opacity-90"
+                      scroll={false}
                     >
-                      Lire cet article en {postLanguage === "fr" ? "français" : "anglais"}
+                      {t('blogPage.readInLanguage', {
+                        language: t(`blogPage.languageName.${postLanguage}`),
+                      })}
                     </Link>
                   </div>
                 )}

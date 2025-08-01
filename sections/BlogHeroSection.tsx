@@ -3,9 +3,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import { LanguageType, useFilter } from "context/filter";
+import { Trans, useTranslation } from "react-i18next";
 
 const BlogHeroSection: React.FC = () => {
   const { searchText, onSearch, postLanguage, onLanguageChange } = useFilter();
+  const { t } = useTranslation();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch!(e.target.value);
@@ -41,24 +43,18 @@ const BlogHeroSection: React.FC = () => {
       <div className="mt-10">
         <div className="overflow-hidden py-1">
           <h1 className="main-header text-4xl lg:text-5xl font-bold">
-            <span className="text-marrsgreen dark:text-carrigreen">Blog</span>{" "}
-            de Woulf
+            <Trans i18nKey="blogPage.title">
+              Woulf's <span className="text-marrsgreen dark:text-carrigreen">Blog</span>
+            </Trans>
           </h1>
         </div>
         <div>
-          <p className="intro-1 mt-4 mb-2">
-            Bonjour à tous ! Bienvenue sur mon blog perso.
-          </p>
-          <p className="intro-2">
-            Dans ce blog, j'écrirai à propos de mes projets (ce que je
-            fais/comment je l'ai fais), mes expériences personnelles, et
-            quelques trucs plus aléatoires.
-          </p>
+          <p className="intro-1 mt-4 mb-2">{t("blogPage.intro1")}</p>
+          <p className="intro-2">{t("blogPage.intro2")}</p>
           <p className="intro-3">
-            Vous pouvez me suivre sur mes réseaux sociaux et mon{" "}
-            <a href="https://github.com/wooulf" className="link">
-              compte Github.
-            </a>
+            <Trans i18nKey="blogPage.intro3">
+              You can follow me on social media and my <a className="link" href="https://github.com/wooulf">Github account</a>.
+            </Trans>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 inline-block ml-1 fill-yellow-500"

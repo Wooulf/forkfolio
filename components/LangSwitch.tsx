@@ -8,7 +8,7 @@ const LangSwitch = () => {
       <div className="z-50 flex gap-2 bg-bglight/80 dark:bg-bgdark/80 p-2 rounded shadow dark:shadow-black/50">
       {languages.map((lang) => {
         const isActive = postLanguage === lang;
-        const baseClasses = "px-2 py-1 text-sm rounded transition-colors";
+        const baseClasses = "px-2 py-1 text-sm rounded";
         const activeClasses =
           "bg-bgdark text-textlight dark:bg-bglight dark:text-black";
         const inactiveClasses =

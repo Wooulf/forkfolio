@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "description": "Corentin Boucard is a backend developer with a DevOps mindset. Passionate about automation and application development, he loves tackling technical challenges and optimizing workflows.",
+    "imageAlt": "Corentin Boucard portfolio"
+  },
+  "blogPage": {
+    "title": "Woulf's <1>Blog</1>",
+    "intro1": "Hi everyone! Welcome to my personal blog.",
+    "intro2": "In this blog, I'll write about my projects (what I'm doing/how I did it), personal experiences, and some more random stuff.",
+    "intro3": "You can follow me on social media and my <1>Github account.</1>",
+    "readInLanguage": "Read this article in {{language}}",
+    "languageName": {
+      "fr": "french",
+      "en": "english"
+    }
+  }
+}

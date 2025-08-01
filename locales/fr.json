@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "description": "Corentin Boucard est un développeur backend avec une approche DevOps. Passionné par l'automatisation et le développement d'applications, il aime relever des défis techniques et optimiser les processus.",
+    "imageAlt": "Portfolio de Corentin Boucard"
+  },
+  "blogPage": {
+    "title": "<1>Blog</1> de Woulf",
+    "intro1": "Bonjour à tous ! Bienvenue sur mon blog perso.",
+    "intro2": "Dans ce blog, j'écrirai à propos de mes projets (ce que je fais/comment je l'ai fais), mes expériences personnelles, et quelques trucs plus aléatoires.",
+    "intro3": "Vous pouvez me suivre sur mes réseaux sociaux et mon <1>compte Github.</1>",
+    "readInLanguage": "Lire cet article en {{language}}",
+    "languageName": {
+      "fr": "français",
+      "en": "anglais"
+    }
+  }
+}
