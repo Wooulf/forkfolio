@@ -59,6 +59,15 @@ const isFeatured = (article) => article.body_markdown.includes('<!-- featured --
 async function saveArticles(articles) {
   await fs.ensureDir(OUTPUT_DIR);
 
+  // Création d'une map des articles français par meta.id
+  const frArticlesMap = {};
+  for (const a of articles) {
+    const meta = extractMetaFromBody(a.body_markdown);
+    if (meta?.lang === 'fr' && meta.id) {
+      frArticlesMap[meta.id] = a;
+    }
+  }
+
   for (const article of articles) {
     const meta = extractMetaFromBody(article.body_markdown);
     if (!meta || !meta.id || !meta.lang) {
@@ -74,8 +83,14 @@ async function saveArticles(articles) {
       console.warn(`⚠️  Aucun alt trouvé pour ${article.slug} → alt générique utilisé.`);
     }
 
+    // Date corrigée si c'est une traduction anglaise
+    let datetime = article.published_at;
+    if (meta.lang === 'en' && frArticlesMap[meta.id]) {
+      datetime = frArticlesMap[meta.id].published_at;
+    }
+
     const frontmatter = {
-      datetime: article.published_at,
+      datetime,
       tags: article.tag_list,
       author: article.user.name,
       type: article.type_of,
