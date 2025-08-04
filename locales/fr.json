@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "description": "Corentin Boucard est un développeur backend avec une approche DevOps. Passionné par l'automatisation et le développement d'applications, il aime relever des défis techniques et optimiser les processus.",
+    "imageAlt": "Portfolio de Corentin Boucard"
+  },
+  "toggleTheme": "Basculer entre le thème clair et sombre",
+  "blogPage": {
+    "nav": {
+      "home": "Accueil",
+      "categories": "Catégories",
+      "tags": "Tags",
+      "portfolio": "Portfolio"
+    },
+    "loadingText": "Blog de Corentin",
+    "title": "<1>Blog</1> de Corentin",
+    "intro1": "Bonjour à tous ! Bienvenue sur mon blog perso.",
+    "intro2": "Dans ce blog, j'écrirai à propos de mes projets (ce que je fais/comment je l'ai fais), mes expériences personnelles, et quelques trucs plus aléatoires.",
+    "intro3": "Vous pouvez me suivre sur mes réseaux sociaux et mon <1>compte Github.</1>",
+    "featuredPosts": "Articles à la une",
+    "searchResults": "Résultat(s) de recherche",
+    "allPosts": "Tous les articles rédigés en français",
+    "readInLanguage": "Lire cet article en {{language}}",
+    "languageName": {
+      "fr": "français",
+      "en": "anglais"
+    },
+    "search": {
+      "placeholder": "Rechercher quelque chose..."
+    },
+    "category": "Catégorie ",
+    "tag": "Tag "
+  },
+  "social": {
+    "github": "Profil GitHub de Corentin",
+    "linkedin": "Profil LinkedIn de Corentin",
+    "devto": "Allez voir Corentin sur Dev.to"
+  },
+  "footer": {
+    "forkedWith": "Forké avec <sr>amour</sr><icon/> par Corentin Boucard"
+  }
+}

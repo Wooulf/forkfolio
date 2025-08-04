@@ -28,6 +28,17 @@ function getFirstLine(markdown) {
   return firstLine.replace(/^_(.*?)_$/, '$1');
 }
 
+function extractMetaFromBody(bodyMarkdown) {
+  const match = bodyMarkdown.match(/<!--\s*meta:\s*(\{.*?\})\s*-->/i);
+  if (!match) return null;
+  try {
+    return JSON.parse(match[1]);
+  } catch (e) {
+    console.warn('⚠️ meta mal formé :', match[1]);
+    return null;
+  }
+}
+
 
 async function fetchDevtoArticles() {
   const res = await fetch('https://dev.to/api/articles/me', {
@@ -48,7 +59,22 @@ const isFeatured = (article) => article.body_markdown.includes('<!-- featured --
 async function saveArticles(articles) {
   await fs.ensureDir(OUTPUT_DIR);
 
+  // Création d'une map des articles français par meta.id
+  const frArticlesMap = {};
+  for (const a of articles) {
+    const meta = extractMetaFromBody(a.body_markdown);
+    if (meta?.lang === 'fr' && meta.id) {
+      frArticlesMap[meta.id] = a;
+    }
+  }
+
   for (const article of articles) {
+    const meta = extractMetaFromBody(article.body_markdown);
+    if (!meta || !meta.id || !meta.lang) {
+      console.warn(`⚠️ Article ${article.slug} sans meta ou meta incomplet → ignoré.`);
+      continue;
+    }
+    
     const filename = `${article.slug}.md`;
     const filepath = path.join(OUTPUT_DIR, filename);
 
@@ -57,8 +83,14 @@ async function saveArticles(articles) {
       console.warn(`⚠️  Aucun alt trouvé pour ${article.slug} → alt générique utilisé.`);
     }
 
+    // Date corrigée si c'est une traduction anglaise
+    let datetime = article.published_at;
+    if (meta.lang === 'en' && frArticlesMap[meta.id]) {
+      datetime = frArticlesMap[meta.id].published_at;
+    }
+
     const frontmatter = {
-      datetime: article.published_at,
+      datetime,
       tags: article.tag_list,
       author: article.user.name,
       type: article.type_of,
@@ -69,7 +101,8 @@ async function saveArticles(articles) {
       slug: article.slug,
       featured: isFeatured(article),
       category: 'DevOps',
-      language: 'French',
+      language: meta.lang,
+      metaId: meta.id
     };
 
     const markdown = matter.stringify(article.body_markdown, frontmatter);

@@ -12,7 +12,8 @@ import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import { getAllPosts } from "utils/api";
 import slugify from "utils/slugify";
-import { MdxMeta } from "../posts/[slug]";
+import { useFilter } from "@/context/filter";
+import { useTranslation } from "react-i18next";
 
 type CategorizedPosts = {
   [key: string]: {
@@ -27,7 +28,9 @@ type Props = {
 };
 
 const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
+  const { searchText, postLanguage } = useFilter();
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   // Animations
   useEffect(() => {
@@ -64,7 +67,7 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
   return (
     <>
       <AppHead title="Blog - Woulf" />
-      <Loader>Categories</Loader>
+      <Loader>{t('blogPage.nav.categories')}</Loader>
       <div ref={sectionRef} className="bg-bglight dark:bg-bgdark ">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
@@ -73,7 +76,7 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
           <main id="main" className="blog-main">
             <section className="blog-section">
               <h1 className="text-3xl lg:text-4xl font-bold mb-4">
-                Categories
+                {t('blogPage.nav.categories')}
               </h1>
               {categories.map((category) => (
                 <div key={category} className="my-4">
@@ -88,7 +91,10 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
                     </h2>
                   </Link>
                   <ul className="flex space-x-4 overflow-x-auto overflow-y-hidden snap-x touch-auto">
-                    {categorizedPosts[category].map((post: any) => (
+                    {categorizedPosts[category].filter(({ language }) => {
+                      return language === postLanguage;
+                    })
+                    .map((post: any) => (
                       <BlogCardBox post={post} key={post.slug} />
                     ))}
                   </ul>
@@ -110,6 +116,7 @@ export const getStaticProps: GetStaticProps = async () => {
     "excerpt",
     "datetime",
     "category",
+    "language",
   ]);
   // get category array ['cate1', 'cate2']
   const categories = posts

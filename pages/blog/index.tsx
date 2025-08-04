@@ -11,6 +11,8 @@ import Footer from "@/components/Footer";
 import { getAllPosts } from "utils/api";
 import { useFilter } from "context/filter";
 import Loader from "@/components/Loader";
+import LangSwitch from "@/components/LangSwitch";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   posts: MdxMeta[];
@@ -18,10 +20,11 @@ type Props = {
 
 const Blog: NextPage<Props> = ({ posts }) => {
   const { searchText, postLanguage } = useFilter();
+  const { t } = useTranslation();
   return (
     <>
       <AppHead title="Blog - Corentin Boucard" />
-      <Loader>Woulf Blog</Loader>
+      <Loader>{t("blogPage.loadingText")}</Loader>
       <div className="bg-bglight dark:bg-bgdark  min-h-screen">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
@@ -29,12 +32,15 @@ const Blog: NextPage<Props> = ({ posts }) => {
           <SocialLinks />
           <main id="main" className="mb-20">
             <BlogHeroSection />
-            {searchText === "" && postLanguage === "All" && (
+            {searchText === "" && (
               <>
                 <div className="px-4 sm:px-8 md:px-20 max-w-4xl mx-auto">
-                  <h2 className="text-2xl font-medium mb-2">Featured Posts</h2>
+                  <h2 className="text-2xl font-medium mb-2">{t("blogPage.featuredPosts")}</h2>
                   <ul>
-                    {posts.map(
+                    {posts.filter(({ language }) => {
+                      return language === postLanguage;
+                    })
+                    .map(
                       (post) =>
                         post.featured && (
                           <BlogCard post={post} key={post.slug} />
@@ -50,10 +56,9 @@ const Blog: NextPage<Props> = ({ posts }) => {
             )}
             <div className="px-4 sm:px-8 md:px-20 max-w-4xl mx-auto">
               <h2 className="text-2xl font-medium mb-2">
-                {searchText === "" && postLanguage === "All" && "All Posts"}
-                {searchText !== "" && <div>Search result(s)</div>}
-                {postLanguage !== "All" &&
-                  `Posts written in '${postLanguage}' language`}
+                {/* {searchText === "" && postLanguage === "all" && "All Posts"} */}
+                {searchText !== "" && <div>{t("blogPage.searchResults")}</div>}
+                {t("blogPage.allPosts")}
               </h2>
               <ul>
                 {posts
@@ -61,7 +66,6 @@ const Blog: NextPage<Props> = ({ posts }) => {
                     title.toLowerCase().includes(searchText.toLowerCase())
                   )
                   .filter(({ language }) => {
-                    if (postLanguage === "All") return true;
                     return language === postLanguage;
                   })
                   .map((post) => (

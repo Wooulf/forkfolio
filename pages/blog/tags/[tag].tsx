@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
 
 import AppHead from "@/components/AppHead";
 import SkipToMain from "@/components/SkipToMain";
@@ -10,6 +11,7 @@ import BlogCard from "@/components/BlogCard";
 import Footer from "@/components/Footer";
 import { getAllPosts, getAllTagPosts } from "utils/api";
 import { MdxMeta } from "../posts/[slug]";
+import { useFilter } from "@/context/filter";
 
 type Props = {
   posts: MdxMeta[];
@@ -18,6 +20,8 @@ type Props = {
 
 const Blog: NextPage<Props> = ({ posts, tag }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { searchText, postLanguage } = useFilter();
+  const { t } = useTranslation();
 
   // Animations
   useEffect(() => {
@@ -45,10 +49,13 @@ const Blog: NextPage<Props> = ({ posts, tag }) => {
           <main id="main" className="blog-main">
             <section className="blog-section">
               <h1 className="overflow-hidden py-1 text-2xl md:text-3xl lg:text-4xl font-medium md:font-bold mb-0 md:mb-8 pl-2 md:pl-4 border-l-8 border-marrsgreen dark:border-carrigreen">
-                <span className="tag-title block">Tag: {tag}</span>
+                <span className="tag-title block">{t("blogPage.tag")}: {tag}</span>
               </h1>
               <ul>
-                {posts.map((post) => (
+                {posts.filter(({ language }) => {
+                    return language === postLanguage;
+                  })
+                  .map((post) => (
                   <BlogCard post={post} key={post.slug} />
                 ))}
               </ul>
@@ -63,7 +70,7 @@ const Blog: NextPage<Props> = ({ posts, tag }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const posts = getAllTagPosts(
-    ["slug", "title", "excerpt", "datetime", "category"],
+    ["slug", "title", "excerpt", "datetime", "category", "language"],
     params!.tag as string
   );
 

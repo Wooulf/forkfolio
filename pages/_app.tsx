@@ -11,6 +11,8 @@ import "highlight.js/styles/github-dark.css"
 import gsap from "gsap";
 import Script from "next/script";
 
+import "@/i18n";
+
 function MyApp({ Component, pageProps }: AppProps) {
   const cursorRef = useRef(null);
 

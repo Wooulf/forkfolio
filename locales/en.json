@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "description": "Corentin Boucard is a backend developer with a DevOps mindset. Passionate about automation and application development, he loves tackling technical challenges and optimizing workflows.",
+    "imageAlt": "Corentin Boucard portfolio"
+  },
+  "toggleTheme": "Toggles light & dark theme",
+  "blogPage": {
+    "nav": {
+      "home": "Home",
+      "categories": "Categories",
+      "tags": "Tags",
+      "portfolio": "Portfolio"
+    },
+    "loadingText": "Corentin's Blog",
+    "title": "Corentin's <1>Blog</1>",
+    "intro1": "Hi everyone! Welcome to my personal blog.",
+    "intro2": "In this blog, I'll write about my projects (what I'm doing/how I did it), personal experiences, and some more random stuff.",
+    "intro3": "You can follow me on social media and my <1>Github account.</1>",
+    "featuredPosts": "Featured Posts",
+    "searchResults": "Search result(s)",
+    "allPosts": "All posts written in english",
+    "readInLanguage": "Read this article in {{language}}",
+    "languageName": {
+      "fr": "french",
+      "en": "english"
+    },
+    "search": {
+      "placeholder": "Search for anything..."
+    },
+    "category": "Category",
+    "tag": "Tag"
+  },
+  "social": {
+    "github": "Corentin's GitHub profile",
+    "linkedin": "Corentin's LinkedIn profile",
+    "devto": "Check out Corentin on Dev.to"
+  },
+  "footer": {
+    "forkedWith": "Forked with <sr>love</sr><icon/> by Corentin Boucard"
+  }
+}

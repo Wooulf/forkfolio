@@ -47,7 +47,7 @@
 }
 
 @utility blog-main {
-  @apply mb-20 mt-16 min-h-[70vh];
+  @apply pb-20 pt-16 min-h-[70vh];
 }
 
 @utility blog-section {
@@ -129,7 +129,7 @@
 }
 
 @utility blog-main {
-  @apply mb-20 mt-16 min-h-[70vh];
+  @apply pb-20 pt-16 min-h-[70vh];
 }
 
 @utility blog-section {

@@ -10,14 +10,31 @@ import Tag from "@/components/blog/Tag";
 import Footer from "@/components/Footer";
 import { getAllPosts } from "utils/api";
 import Loader from "@/components/Loader";
+import { useFilter } from "@/context/filter";
+import { MdxMeta } from "../posts/[slug]";
+import { useTranslation } from "react-i18next";
 
 type Props = {
-  tags: string[];
-  tagCounts: { [key: string]: number };
+  posts: MdxMeta[];
 };
 
-const Blog: NextPage<Props> = ({ tags, tagCounts }) => {
+const Blog: NextPage<Props> = ({posts}) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { searchText, postLanguage } = useFilter();
+  const { t } = useTranslation();
+
+  let tags: string[] = [];
+  for (let post of posts) {
+    if (post.tags && post.language === postLanguage) tags.push(...(post.tags as string[]));
+  }
+
+  const tagCounts: { [key: string]: number } = {};
+
+  for (const tag of tags) {
+    tagCounts[tag] = tagCounts[tag] ? tagCounts[tag] + 1 : 1;
+  }
+
+  tags = tags.filter((x, i, a) => a.indexOf(x) == i);
 
   // Animations
   useEffect(() => {
@@ -41,7 +58,7 @@ const Blog: NextPage<Props> = ({ tags, tagCounts }) => {
   return (
     <>
       <AppHead title="Blog - Woulf" />
-      <Loader>Tags</Loader>
+      <Loader>{t('blogPage.nav.tags')}</Loader>
       <div ref={sectionRef} className="bg-bglight dark:bg-bgdark  min-h-screen">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
@@ -49,7 +66,7 @@ const Blog: NextPage<Props> = ({ tags, tagCounts }) => {
           <SocialLinks />
           <main id="main" className="blog-main">
             <section className="blog-section">
-              <h1 className="text-3xl lg:text-4xl font-bold mb-4">Tags</h1>
+              <h1 className="text-3xl lg:text-4xl font-bold mb-4">{t('blogPage.nav.tags')}</h1>
               <ul>
                 {tags &&
                   tags.map((tag: string) => (
@@ -68,25 +85,14 @@ const Blog: NextPage<Props> = ({ tags, tagCounts }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getAllPosts(["tags"]);
-
-  let tags: string[] = [];
-  for (let post of posts) {
-    if (post.tags) tags.push(...(post.tags as string[]));
-  }
-
-  const tagCounts: { [key: string]: number } = {};
-
-  for (const tag of tags) {
-    tagCounts[tag] = tagCounts[tag] ? tagCounts[tag] + 1 : 1;
-  }
-
-  tags = tags.filter((x, i, a) => a.indexOf(x) == i);
+  const posts = getAllPosts([
+    "tags",
+    "language",
+  ]);
 
   return {
     props: {
-      tags,
-      tagCounts,
+      posts,
     },
   };
 };
