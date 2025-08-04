@@ -13,6 +13,7 @@ import Loader from "@/components/Loader";
 import { getAllPosts } from "utils/api";
 import slugify from "utils/slugify";
 import { useFilter } from "@/context/filter";
+import { useTranslation } from "react-i18next";
 
 type CategorizedPosts = {
   [key: string]: {
@@ -29,6 +30,7 @@ type Props = {
 const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
   const { searchText, postLanguage } = useFilter();
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   // Animations
   useEffect(() => {
@@ -65,7 +67,7 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
   return (
     <>
       <AppHead title="Blog - Woulf" />
-      <Loader>Categories</Loader>
+      <Loader>{t('blogPage.nav.categories')}</Loader>
       <div ref={sectionRef} className="bg-bglight dark:bg-bgdark ">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
@@ -74,7 +76,7 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
           <main id="main" className="blog-main">
             <section className="blog-section">
               <h1 className="text-3xl lg:text-4xl font-bold mb-4">
-                Categories
+                {t('blogPage.nav.categories')}
               </h1>
               {categories.map((category) => (
                 <div key={category} className="my-4">

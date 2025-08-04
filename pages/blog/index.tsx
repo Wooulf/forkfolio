@@ -12,6 +12,7 @@ import { getAllPosts } from "utils/api";
 import { useFilter } from "context/filter";
 import Loader from "@/components/Loader";
 import LangSwitch from "@/components/LangSwitch";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   posts: MdxMeta[];
@@ -19,22 +20,22 @@ type Props = {
 
 const Blog: NextPage<Props> = ({ posts }) => {
   const { searchText, postLanguage } = useFilter();
+  const { t } = useTranslation();
   return (
     <>
       <AppHead title="Blog - Corentin Boucard" />
-      <Loader>Woulf Blog</Loader>
+      <Loader>{t("blogPage.loadingText")}</Loader>
       <div className="bg-bglight dark:bg-bgdark  min-h-screen">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />
-          <LangSwitch />
           <SocialLinks />
           <main id="main" className="mb-20">
             <BlogHeroSection />
             {searchText === "" && (
               <>
                 <div className="px-4 sm:px-8 md:px-20 max-w-4xl mx-auto">
-                  <h2 className="text-2xl font-medium mb-2">Featured Posts</h2>
+                  <h2 className="text-2xl font-medium mb-2">{t("blogPage.featuredPosts")}</h2>
                   <ul>
                     {posts.filter(({ language }) => {
                       return language === postLanguage;
@@ -56,8 +57,8 @@ const Blog: NextPage<Props> = ({ posts }) => {
             <div className="px-4 sm:px-8 md:px-20 max-w-4xl mx-auto">
               <h2 className="text-2xl font-medium mb-2">
                 {/* {searchText === "" && postLanguage === "all" && "All Posts"} */}
-                {searchText !== "" && <div>Search result(s)</div>}
-                {`All posts written in '${postLanguage}' language`}
+                {searchText !== "" && <div>{t("blogPage.searchResults")}</div>}
+                {t("blogPage.allPosts")}
               </h2>
               <ul>
                 {posts

@@ -12,6 +12,7 @@ import { getAllPosts } from "utils/api";
 import Loader from "@/components/Loader";
 import { useFilter } from "@/context/filter";
 import { MdxMeta } from "../posts/[slug]";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   posts: MdxMeta[];
@@ -20,6 +21,7 @@ type Props = {
 const Blog: NextPage<Props> = ({posts}) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { searchText, postLanguage } = useFilter();
+  const { t } = useTranslation();
 
   let tags: string[] = [];
   for (let post of posts) {
@@ -56,7 +58,7 @@ const Blog: NextPage<Props> = ({posts}) => {
   return (
     <>
       <AppHead title="Blog - Woulf" />
-      <Loader>Tags</Loader>
+      <Loader>{t('blogPage.nav.tags')}</Loader>
       <div ref={sectionRef} className="bg-bglight dark:bg-bgdark  min-h-screen">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
@@ -64,7 +66,7 @@ const Blog: NextPage<Props> = ({posts}) => {
           <SocialLinks />
           <main id="main" className="blog-main">
             <section className="blog-section">
-              <h1 className="text-3xl lg:text-4xl font-bold mb-4">Tags</h1>
+              <h1 className="text-3xl lg:text-4xl font-bold mb-4">{t('blogPage.nav.tags')}</h1>
               <ul>
                 {tags &&
                   tags.map((tag: string) => (

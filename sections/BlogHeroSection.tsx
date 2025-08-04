@@ -53,7 +53,7 @@ const BlogHeroSection: React.FC = () => {
           <p className="intro-2">{t("blogPage.intro2")}</p>
           <p className="intro-3">
             <Trans i18nKey="blogPage.intro3">
-              You can follow me on social media and my <a className="link" href="https://github.com/wooulf">Github account</a>.
+              You can follow me on social media and my <a className="link" target="_blank" rel="noopener noreferrer" href="https://github.com/wooulf">Github account</a>.
             </Trans>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,7 @@ const BlogHeroSection: React.FC = () => {
                     block bg-cardlight dark:bg-carddark w-full rounded shadow-md
                     border border-cardlight dark:border-carddark border-opacity-40 
                     focus:outline-hidden focus:border-marrslight dark:focus:border-carrilight"
-          placeholder="Search for anything..."
+          placeholder={t("blogPage.search.placeholder")}
           type="text"
           name="search"
           defaultValue={searchText}

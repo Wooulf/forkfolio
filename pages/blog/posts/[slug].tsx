@@ -60,7 +60,7 @@ const BlogLayout: React.FC<Props> = ({ post, slugByLang }) => {
         url={`${process.env.NEXT_PUBLIC_URL}/blog/posts/${post.slug}`}
         meta={post}
       />
-      <div className="bg-bglight dark:bg-bgdark ">
+      <div className="bg-bglight dark:bg-bgdark">
         <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />
@@ -128,7 +128,7 @@ const BlogLayout: React.FC<Props> = ({ post, slugByLang }) => {
               {postLanguage &&
                 postLanguage !== post.language &&
                 slugByLang[postLanguage] && (
-                  <div className="sticky bottom-7 z-40 flex justify-center">
+                  <div className="sticky bottom-[88px] sm:bottom-7 z-40 flex justify-center">
                     <Link
                       href={`/blog/posts/${slugByLang[postLanguage]}`}
                       className="inline-block bg-marrsgreen text-bglight dark:bg-carrigreen dark:text-bgdark font-medium px-4 py-2 rounded hover:opacity-90"
