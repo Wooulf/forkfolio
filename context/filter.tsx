@@ -32,17 +32,18 @@ export const useFilter = () => useContext(filterContext);
 const useProvideFilter = () => {
   const { i18n } = useTranslation();
   const [searchText, setSearchText] = useState("");
-  // Important : valeur initiale fixe côté SSR, puis on corrige au mount
   const [postLanguage, setPostLanguage] = useState<LanguageType>("en");
   const [mounted, setMounted] = useState(false);
 
   // Dès le mount, on récupère la langue depuis i18n (qui lit localStorage automatiquement)
   useEffect(() => {
-    setPostLanguage(i18n.language as LanguageType);
+    // i18n.language peut valoir "fr-FR", "en-US", etc. → on ne garde que "fr" ou "en"
+    const lang = i18n.language?.split("-")[0];
+    setPostLanguage((lang === "fr" || lang === "en") ? lang : "en");
     setMounted(true);
   }, [i18n.language]);
 
-  // Permet de changer la langue *et* de déclencher les effets associés
+  // Permet de changer la langue et de déclencher les effets associés
   const onLanguageChange = useCallback((val: LanguageType) => {
     i18n.changeLanguage(val);
     setPostLanguage(val);
