@@ -1,6 +1,6 @@
 # forkfolio
 
-🚀 Mon portfolio personnel — auto-hébergé, conteneurisé, sécurisé, et déployé via GitOps.  
+🚀 Mon portfolio personnel - auto-hébergé, conteneurisé, sécurisé, et déployé via GitOps.  
 Un projet vitrine autant pour mon code que pour ma démarche DevOps.
 
 ---
